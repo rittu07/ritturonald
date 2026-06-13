@@ -146,6 +146,9 @@ let charIndex = 0;
 let isDeleting = false;
 
 function typeWriter() {
+    // Skip typewriter execution on mobile viewports since the hero section is hidden
+    if (window.innerWidth <= 768) return;
+
     const typewriterBase = document.querySelector('.typewriter-base');
     const typewriterReveal = document.querySelector('.typewriter-reveal');
     
@@ -910,6 +913,12 @@ function initHeroScrollReveal() {
     const portraitImg = document.querySelector('.hero-portrait-img');
     
     if (!revealLayer) return;
+
+    // Skip scroll reveal calculations on mobile/tablet viewports to conserve CPU/battery
+    if (window.innerWidth <= 768) {
+        if (scrollText) scrollText.style.display = 'none';
+        return;
+    }
     
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
@@ -1011,6 +1020,12 @@ function initSmartNav() {
 function init3DRobotArm() {
     const container = document.getElementById('robot-3d-container');
     if (!container) return;
+
+    // Skip Three.js rendering on mobile/tablet viewports to maximize performance and save battery
+    if (window.innerWidth <= 768) {
+        container.style.display = 'none';
+        return;
+    }
 
     if (typeof THREE === 'undefined') {
         console.warn('Three.js not loaded. Retrying in 200ms...');
@@ -1848,6 +1863,50 @@ function ensureNavControls() {
         `;
         nav.appendChild(navControls);
     }
+    
+    // Auto-synthesize mobile hamburger toggle button if missing
+    let burgerBtn = navControls.querySelector('#mobile-nav-toggle');
+    if (!burgerBtn) {
+        burgerBtn = document.createElement('button');
+        burgerBtn.id = 'mobile-nav-toggle';
+        burgerBtn.className = 'control-btn mobile-nav-btn';
+        burgerBtn.title = 'Toggle Menu';
+        burgerBtn.setAttribute('aria-label', 'Toggle Navigation Menu');
+        burgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        navControls.appendChild(burgerBtn);
+    }
+}
+
+function initMobileNav() {
+    const burgerBtn = document.getElementById('mobile-nav-toggle');
+    const nav = document.querySelector('nav');
+    
+    if (!burgerBtn || !nav) return;
+    
+    burgerBtn.addEventListener('click', () => {
+        nav.classList.toggle('mobile-active');
+        const icon = burgerBtn.querySelector('i');
+        if (nav.classList.contains('mobile-active')) {
+            icon.className = 'fa-solid fa-xmark';
+        } else {
+            icon.className = 'fa-solid fa-bars';
+        }
+        if (typeof synth !== 'undefined') {
+            synth.playClick();
+        }
+    });
+    
+    // Close mobile nav drawer when clicking any page link
+    const navLinks = nav.querySelectorAll('ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (nav.classList.contains('mobile-active')) {
+                nav.classList.remove('mobile-active');
+                const icon = burgerBtn.querySelector('i');
+                if (icon) icon.className = 'fa-solid fa-bars';
+            }
+        });
+    });
 }
 
 function initAudioToggle() {
@@ -1943,6 +2002,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize mechatronics control systems
     ensureNavControls();
+    initMobileNav();
     initAudioToggle();
     initAudioTriggers();
     
