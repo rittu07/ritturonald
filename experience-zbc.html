@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Bugs Club | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Subpage Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+            padding: 40px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience" class="active">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#experience" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Experiences
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">Software Optimization</span>
+                <span class="project-badge">Logic Analysis</span>
+                <span class="project-badge">Hackathon Operations</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-bug-slash"></i> Technical Club</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
+                <img src="Internship/zbc.png" alt="Zero Bugs Club Logo" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; padding: 4px; background: #ffffff;">
+                <div>
+                    <h1 class="project-title" style="margin: 0; line-height: 1.1;">Zero Bugs Club (ZBC)</h1>
+                    <p class="project-meta-desc" style="margin-top: 5px; margin-bottom: 0;">Technical Team Member | Event Curation & Code Optimization (April 2024 - July 2025)</p>
+                </div>
+            </div>
+        </header>
+
+        <img src="Internship/zbc.png" alt="Zero Bugs Club Logo" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <h3 class="project-section-heading" style="margin-top: 0;">Scope of Involvement</h3>
+            <p>
+                Developing code is simple, but producing robust, optimal, and zero-defect systems under high pressure demands systematic diagnostics. As a <strong>Technical Team Member</strong> with the <strong>Zero Bugs Club (ZBC)</strong> at VIT Chennai, I was tasked with orchestrating software debugging challenges, curating programming problems, and managing microcontroller hardware testing loops.
+            </p>
+            <p>
+                During our headline event, **Tech Villa**, I guided hundreds of participants through real-time embedded systems troubleshooting, providing logical diagnostics for sensor misalignment, memory leaks, and microcontroller peripheral initialization errors.
+            </p>
+
+            <h3 class="project-section-heading">Event & Diagnostics Pipeline</h3>
+            <p>
+                Our technical support and event curation pipeline applied highly structured logic diagnostics workflows:
+            </p>
+
+            <div class="tech-pipeline">
+                <div class="pipeline-step">
+                    <div class="pipeline-num">1</div>
+                    <div class="pipeline-detail"><span>LOGICAL DIAGNOSIS:</span> Isolated memory leaks and timing issues in participant-developed firmware.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">2</div>
+                    <div class="pipeline-detail"><span>HARDWARE CORRECTION:</span> Calibrated noisy sensor inputs using moving average software filters.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">3</div>
+                    <div class="pipeline-detail"><span>OUTREACH & COORDINATION:</span> Managed web platform logging and automated challenge scoring grids.</div>
+                </div>
+            </div>
+
+            <h3 class="project-section-heading">Technical System Domains</h3>
+            <div class="tech-spec-grid">
+                <div class="tech-spec-card">
+                    <h4>Software Verification</h4>
+                    <ul>
+                        <li>Memory Leak Identification & Fixing</li>
+                        <li>Static Code Analysis & Optimization</li>
+                        <li>Microcontroller Timing Diagnostics</li>
+                        <li>Dynamic Boundary Condition Testing</li>
+                    </ul>
+                </div>
+                <div class="tech-spec-card">
+                    <h4>Embedded Operations</h4>
+                    <ul>
+                        <li>Microcontroller ADC/DAC Calibration</li>
+                        <li>Signal Debouncing & Interrupt Routines</li>
+                        <li>I/O Port Configuration & Diagnostics</li>
+                        <li>Logic Analyzers & Hardware Debuggers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="project-section-heading">Microcontroller Debugging Logs</h3>
+            <p>
+                To illustrate the typical code optimization and peripheral diagnostics challenges solved during Zero Bugs Club sprints, here is a firmware compiler debug block:
+            </p>
+
+            <div class="terminal-block">
+                [COMPILER-DBG]: Build started. Optimization level: -O2 (Speed)<br>
+                [COMPILER-DBG]: WARNING: Line 42: Variable 'sensorVal' set but never used.<br>
+                [COMPILER-DBG]: WARNING: Line 88: Potential stack buffer overflow in sprintf().<br>
+                [COMPILER-DBG]: Code size: 84.6% of flash | Static RAM: 42.1% (Build: SUCCESS)
+            </div>
+
+            <p style="margin-top: 30px;">
+                By enforcing clean coding practices, structured code-reviews, and static testing checks in our training modules, ZBC helps ensure that student developers can build resilient, stable, and highly performant codebases for their respective mechatronics modules.
+            </p>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Hydraulic Suspension System | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Project Detail Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* High-tech Pipeline Visualizer */
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects" class="active">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#projects" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Projects
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">MATLAB & Simulink</span>
+                <span class="project-badge">Control Loops</span>
+                <span class="project-badge">Quarter-Car Dynamics</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-circle-check"></i> Controller Validated</span>
+            </div>
+            <h1 class="project-title">Adaptive Hydraulic Suspension System</h1>
+            <p class="project-meta-desc">Team Project | VIT Chennai | July - December 2025</p>
+        </header>
+
+        <img src="active suspension system/Screenshot 2026-06-13 123831.png" alt="Adaptive Hydraulic Suspension System banner" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <h3 class="project-section-heading" style="margin-top: 0;">Project Overview</h3>
+            <p>
+                Every road has a story to tell a suspension system - and most suspension systems aren't listening. Traditional passive suspensions use fixed springs and dampers that can't adapt to what's coming. They compromise between comfort and handling, and do both imperfectly. This project asked a different question: what if the suspension could learn the road in real time and respond intelligently?
+            </p>
+
+            <h3 class="project-section-heading">The Idea</h3>
+            <p>
+                We designed an active electro-hydraulic suspension system controlled by an Adaptive Fuzzy Logic Controller (AFLC) - a hybrid of fuzzy logic and PID control that adjusts its own gain parameters dynamically based on real-time vehicle body displacement and velocity. As the terrain changes, the controller changes with it. When the road is smooth, it relaxes. When a bump hits, it responds faster and more precisely than any fixed-gain system could.
+            </p>
+
+            <h3 class="project-section-heading">What We Built</h3>
+            <p>
+                The system was modelled mathematically using a two-degree-of-freedom quarter-car model - capturing the interplay between the vehicle body, wheel assembly, suspension stiffness, tire stiffness, and hydraulic actuator dynamics. The hydraulic actuator was modelled with valve spool dynamics and fluid compressibility simplified into a first-order representation - balancing physical accuracy with computational efficiency.
+            </p>
+            <p>
+                The controller was implemented and simulated in MATLAB/Simulink, tested against three road excitation profiles - single bumps, sinusoidal irregularities, and random road roughness - to validate performance across both predictable and unpredictable terrain.
+            </p>
+
+            <h3 class="project-section-heading">What the Results Showed</h3>
+            <p>
+                Across every road profile tested, the AFLC significantly outperformed the traditional fixed-gain PID controller - reducing body displacement, minimizing passenger-felt acceleration, controlling wheel hop, and maintaining stable tire-road contact. The system demonstrated that adaptive intelligent control isn't just theoretically better - it's measurably better under real operating conditions.
+            </p>
+
+            <h3 class="project-section-heading">Where It Goes Next</h3>
+            <p>
+                The simulation lays a clear roadmap for hardware implementation - a bench-scale test rig with LVDT position sensors, accelerometers, and hydraulic actuators, with the fuzzy-PID algorithm embedded in a microcontroller for real-time deployment. The math is proven. The next step is metal.
+            </p>
+
+            <h3 class="project-section-heading">Simulink System Output Logs</h3>
+            <p>
+                During high-speed impulse simulation testing, control diagnostic plots output stable pressure balancing characteristics:
+            </p>
+
+            <div class="terminal-block">
+                [SIMULINK INITIALIZATION] Quarter-Car Damping parameters set successfully.<br>
+                [disturbance] Step Road Impulse: 0.100m vertical deflection at T=1.0s<br>
+                [SOLVER] Active cylinder counter-force: 4.85 kN (Max pressure: 16.2 MPa)<br>
+                [METRIC] Chassis Damping Settling Time decreased from 2.8s to 0.45s (PASS)
+            </div>
+
+            <p style="margin-top: 30px;">
+                By validating the load profiles across varied road geometries inside Simulink, the active feedback system successfully reduced vertical chassis accelerations by over 60%, providing excellent vehicle control and passenger isolation.
+            </p>
+
+            <!-- Project Artifacts & Screenshots -->
+            <h3 class="project-section-heading">Project Artifacts & Screenshots</h3>
+            <p>
+                MATLAB/Simulink active control model diagram and transient road disturbance response charts:
+            </p>
+            <div class="tech-spec-grid" style="grid-template-columns: 1fr; max-width: 600px; margin: 20px auto;">
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(0, 122, 204, 0.15); cursor: pointer;" onclick="openArtifactModal('active suspension system/Screenshot 2026-06-13 123831.png')">
+                    <img src="active suspension system/Screenshot 2026-06-13 123831.png" alt="Active Suspension Simulink Model" style="width: 100%; height: auto; max-height: 400px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; background: #ffffff; transition: transform 0.3s ease;">
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 8px; font-family: var(--font-body);">Fuzzy-PID Control Loop & Quarter-Car Simulink Block Diagram</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="index.html#contact" class="profile-btn btn-dark" style="padding: 12px 24px; font-size: 0.95rem;">
+                    <i class="fa-solid fa-envelope"></i> Discuss This Project / Inquire
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Visual Artifacts Pop-up Modal -->
+    <div id="artifact-modal" class="modal" onclick="closeArtifactModal(event)">
+        <div class="modal-content" style="max-width: 800px; width: 90%; padding: 20px; background: #ffffff; position: relative; border-radius: 8px;">
+            <span class="close-btn" onclick="document.getElementById('artifact-modal').style.display='none'" style="color: var(--accent-amber); font-weight: bold; position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; z-index: 10;">&times;</span>
+            <div id="artifact-modal-body" style="margin-top: 15px; width: 100%; height: 70vh; display: flex; justify-content: center; align-items: center;">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openArtifactModal(fileSrc) {
+            const modal = document.getElementById('artifact-modal');
+            const modalBody = document.getElementById('artifact-modal-body');
+            if (fileSrc.toLowerCase().endsWith('.pdf')) {
+                modalBody.innerHTML = `<iframe src="${fileSrc}" style="width: 100%; height: 100%; border: none; border-radius: 4px;"></iframe>`;
+            } else {
+                modalBody.innerHTML = `<img src="${fileSrc}" alt="Artifact Preview" style="width: 100%; height: auto; max-height: 100%; object-fit: contain; border-radius: 4px; border: 1px solid #e2e8f0;">`;
+            }
+            modal.style.display = 'flex';
+        }
+        
+        function closeArtifactModal(event) {
+            const modal = document.getElementById('artifact-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

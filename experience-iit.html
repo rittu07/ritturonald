@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIT Madras Internship | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Subpage Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom tables & lists */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .test-facilities-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            min-width: 600px;
+        }
+
+        .test-facilities-table th {
+            background-color: #0f172a;
+            color: #38bdf8;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .test-facilities-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .test-facilities-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .test-facilities-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .test-facilities-table tr:hover {
+            background-color: rgba(0, 122, 204, 0.04);
+        }
+
+        .facility-badge {
+            font-family: var(--font-head);
+            font-weight: 700;
+            color: var(--accent-cyan);
+            background: rgba(0, 122, 204, 0.06);
+            border: 1px solid rgba(0, 122, 204, 0.15);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .reflection-card {
+            background: rgba(212, 136, 6, 0.03);
+            border-left: 4px solid var(--accent-amber);
+            padding: 30px;
+            border-radius: 0 8px 8px 0;
+            margin: 40px 0 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+        }
+
+        .reflection-card h4 {
+            color: var(--accent-amber);
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reflection-text {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 0 !important;
+        }
+
+        /* Detailed Bullet Lists with Custom Counters/Gradients */
+        .detailed-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 25px 0;
+        }
+
+        .detailed-list-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid #e2e8f0;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detailed-list-item:hover {
+            border-left-color: var(--accent-cyan);
+        }
+
+        .detailed-list-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .detailed-list-item:hover::before {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .detailed-list-item-title {
+            color: var(--text-main);
+            font-family: var(--font-head);
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience" class="active">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#experience" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Experiences
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">EV Wireless Power</span>
+                <span class="project-badge">Inductive Coupling</span>
+                <span class="project-badge">SolidWorks CAD</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-graduation-cap"></i> Academic Research</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
+                <img src="Internship/iit_madras.jpg" alt="IIT Madras Logo" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; padding: 4px; background: #ffffff;">
+                <div>
+                    <h1 class="project-title" style="margin: 0; line-height: 1.1;">IIT Madras</h1>
+                    <p class="project-meta-desc" style="margin-top: 5px; margin-bottom: 0;">Research Intern | Inductive Wireless Power Transfer Lab (May 19, 2025 - July 19, 2025)</p>
+                </div>
+            </div>
+            <p style="font-size: 0.95rem; color: var(--accent-amber); font-weight: 700; margin-top: 15px; font-family: var(--font-body); border-left: 2px solid var(--accent-amber); padding-left: 15px; line-height: 1.5; font-style: italic;">
+                Coil design looks like a geometry problem until the electromagnetic fields start leaking. Then it becomes a safety problem. IIT Madras taught me to see both at once.
+            </p>
+        </header>
+
+        <img src="photos/iit-madras-indian-institute-of-technology-madras4653.jpg" alt="IIT Madras Research Lab banner" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <!-- Overview -->
+            <h3 class="project-section-heading" style="margin-top: 0;">Overview</h3>
+            <p>
+                The Department of Engineering Design at IIT Madras is one of India's most active hubs for interdisciplinary research - spanning autonomous vehicles, robotics, electric mobility, and energy systems. I joined the wireless power transfer research group under <strong>Dr. Deepak Ronanki</strong>, working on a problem that is quietly reshaping how electric vehicles will charge in the near future: how do you transfer tens of kilowatts of power across an air gap - with no physical connection - safely, efficiently, and within international radiation safety limits?
+            </p>
+            <p>
+                That was the problem. My job was to design the coils and simulate the physics.
+            </p>
+
+            <!-- The Problem Worth Solving -->
+            <h3 class="project-section-heading">The Problem Worth Solving</h3>
+            <p>
+                Wireless charging for EVs sounds simple until you realize the engineering behind it. At 85kHz operating frequency, the system generates alternating electromagnetic fields strong enough to transfer meaningful power - but those same fields pose risks to human safety and nearby electronics if they leak beyond the intended transfer zone.
+            </p>
+            <p>
+                International safety standards (ICNIRP) cap allowable magnetic field exposure at just 27 μT at 85kHz. Every coil geometry, every shielding decision, every millimeter of design is a negotiation between power transfer efficiency and electromagnetic containment.
+            </p>
+
+            <!-- 3D Coil Structures Designed -->
+            <h3 class="project-section-heading">3D Coil Structures Designed</h3>
+            <p>
+                I designed and modelled 3 distinct coil architectures - each representing a different engineering philosophy:
+            </p>
+            <div class="table-responsive">
+                <table class="test-facilities-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Structure</th>
+                            <th style="width: 40%;">Design</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="facility-badge">Single Layer</span></td>
+                            <td>Compact planar, 60° span, bipolar winding</td>
+                            <td>Low-to-mid power, simple alignment</td>
+                        </tr>
+                        <tr>
+                            <td><span class="facility-badge">Double Layer</span></td>
+                            <td>Stacked phases, 120° span, stronger flux</td>
+                            <td>Medium-to-high power, better coupling</td>
+                        </tr>
+                        <tr>
+                            <td><span class="facility-badge">Triple Layer</span></td>
+                            <td>Each phase in separate vertical layer, 180° span</td>
+                            <td>High power density, experimental</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 15px;">
+                All structures were also modelled with Litz wire configurations - the industry standard for minimising resistive losses at high frequency. Every model was built from scratch in CAD before being imported into simulation.
+            </p>
+
+            <!-- ANSYS Simulation & Analysis -->
+            <h3 class="project-section-heading">ANSYS Simulation & Analysis</h3>
+            <p>
+                All coil structures were imported into ANSYS Electronics Desktop and run through eddy current analysis at 85kHz - the standard operating frequency for EV wireless charging. The simulation pipeline:
+            </p>
+            <p>
+                Each coil was placed inside an air region, assigned 90A RMS current with three-phase excitation at 0°, 120°, and 240°. Matrix assignments mapped all current paths. Mesh operations were validated and simulations run - producing a full self and mutual inductance matrix for every structure.
+            </p>
+            <p>
+                Self-inductance values for the triangular phase coils settled around 38μH - a key baseline for system resonance tuning. Both primary-only and primary-secondary configurations (separated by 150mm air gap) were analyzed. Multiple rounds of iteration with ANSYS support specialists refined the methodology before final results were locked in.
+            </p>
+
+            <!-- Electromagnetic Shielding Research -->
+            <h3 class="project-section-heading">Electromagnetic Shielding Research</h3>
+            <p>
+                Beyond coil design, I conducted a comprehensive study of shielding strategies - because a great coil design means nothing if the EMF leaks outside the safety envelope.
+            </p>
+
+            <ul class="detailed-list">
+                <li class="detailed-list-item">
+                    <span class="detailed-list-item-title">Passive Shielding - Aluminum</span>
+                    <p style="margin-bottom: 8px;">Aluminum shields work by generating eddy currents that oppose the leakage field through Lenz's Law. At 85kHz, the skin depth in aluminum is just 0.28mm - meaning nearly all shielding action happens in a razor-thin surface layer. Three approaches were studied:</p>
+                    <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.9rem; color: #475569;">
+                        <li><strong>Solid plates:</strong> Strong shielding but high I²R losses and reduced coupling efficiency.</li>
+                        <li><strong>Laminated sheets:</strong> 10 layers of 0.2mm foil cut eddy current losses by 31% and improved pad efficiency from 91.8% -> 94.1%.</li>
+                        <li><strong>Slotted/patterned:</strong> Radial and honeycomb patterns reduced coupling losses by 5-8% while improving thermal management.</li>
+                    </ul>
+                </li>
+                <li class="detailed-list-item">
+                    <span class="detailed-list-item-title">Passive Shielding - Ferrite</span>
+                    Ferrite tiles guide magnetic flux along desired paths rather than blocking it - high permeability without eddy current losses. Best practice combines ferrite backing with laminated aluminum for a hybrid system that handles both flux guidance and EMF containment simultaneously.
+                </li>
+                <li class="detailed-list-item">
+                    <span class="detailed-list-item-title">Active Shielding</span>
+                    Active systems use powered cancellation coils to destructively interfere with leakage fields. More adaptive, but more complex - studied as a future direction rather than current implementation standard.
+                </li>
+            </ul>
+
+            <!-- Internship Artifacts & Certification -->
+            <h3 class="project-section-heading">Internship Artifacts & Certification</h3>
+            <p>
+                Official project documentation and training certification from my research internship at IIT Madras:
+            </p>
+            <div class="tech-spec-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 20px;">
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(0, 122, 204, 0.15); cursor: pointer;" onclick="openArtifactModal('photos/iit-madras-indian-institute-of-technology-madras4653.jpg')">
+                    <img src="photos/iit-madras-indian-institute-of-technology-madras4653.jpg" alt="IIT Madras Research Lab" style="width: 100%; height: auto; max-height: 280px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; background: #ffffff; transition: transform 0.3s ease;">
+                </div>
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(212, 136, 6, 0.15); cursor: pointer;" onclick="openArtifactModal('IIT certificate.pdf')">
+                    <div style="padding: 30px 10px; color: var(--accent-amber);">
+                        <i class="fa-solid fa-file-pdf" style="font-size: 3.5rem; margin-bottom: 15px;"></i>
+                        <h4 style="font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; text-transform: uppercase; margin-bottom: 8px; color: var(--text-main);">IIT Certificate.pdf</h4>
+                        <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 0;">Click to open PDF Certificate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What I Took Away -->
+            <div class="reflection-card">
+                <h4><i class="fa-solid fa-graduation-cap"></i> What I Took Away</h4>
+                <p class="reflection-text">
+                    IIT Madras taught me that simulation-driven design is not a shortcut - it is the methodology. Before a single prototype is built, the physics can be explored, challenged, and optimised hundreds of times in software. That discipline - validate before you fabricate - is one I carry into every project.
+                    <br><br>
+                    This internship also connected two areas I care deeply about: electromagnetic systems design and the future of sustainable transport. Wireless EV charging is not a research curiosity anymore - it is coming. And understanding the engineering behind it, at the coil geometry level, puts me ahead of that curve.
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Visual Artifacts Pop-up Modal -->
+    <div id="artifact-modal" class="modal" onclick="closeArtifactModal(event)">
+        <div class="modal-content" style="max-width: 800px; width: 90%; padding: 20px; background: #ffffff; position: relative; border-radius: 8px;">
+            <span class="close-btn" onclick="document.getElementById('artifact-modal').style.display='none'" style="color: var(--accent-amber); font-weight: bold; position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; z-index: 10;">&times;</span>
+            <div id="artifact-modal-body" style="margin-top: 15px; width: 100%; height: 70vh; display: flex; justify-content: center; align-items: center;">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openArtifactModal(fileSrc) {
+            const modal = document.getElementById('artifact-modal');
+            const modalBody = document.getElementById('artifact-modal-body');
+            if (fileSrc.toLowerCase().endsWith('.pdf')) {
+                modalBody.innerHTML = `<iframe src="${fileSrc}" style="width: 100%; height: 100%; border: none; border-radius: 4px;"></iframe>`;
+            } else {
+                modalBody.innerHTML = `<img src="${fileSrc}" alt="Artifact Preview" style="width: 100%; height: auto; max-height: 100%; object-fit: contain; border-radius: 4px; border: 1px solid #e2e8f0;">`;
+            }
+            modal.style.display = 'flex';
+        }
+        
+        function closeArtifactModal(event) {
+            const modal = document.getElementById('artifact-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

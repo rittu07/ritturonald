@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Follower Robot - ROS 2 & OpenCV | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Project Detail Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* High-tech Pipeline Visualizer */
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects" class="active">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#projects" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Projects
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">OpenCV 4</span>
+                <span class="project-badge">ROS 2</span>
+                <span class="project-badge">Centroid Tracking</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-circle-check"></i> Perception Online</span>
+            </div>
+            <h1 class="project-title">Line Follower Robot - ROS 2 & OpenCV</h1>
+            <p class="project-meta-desc">Developed an autonomous computer vision module using ROS 2 and OpenCV, tracking track trajectories through real-time camera centroid processing.</p>
+        </header>
+
+        <img src="line follower/1741513830404.jpg" alt="ROS 2 Vision Line Follower banner" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <h3 class="project-section-heading" style="margin-top: 0;">Project Overview</h3>
+            <p>
+                Vision-based steering represents a classical control challenge inside automated guided vehicles (AGVs) and autonomous warehouse robots. This project designed and integrated an intelligent vision node in ROS 2, using raw monocular camera feeds to perform real-time binary segmentation and center-of-mass centroid calculations.
+            </p>
+            <p>
+                By processing tracking contours using optimized OpenCV kernels, the node calculates the angular deflection between the robot's physical center and the center of the track's path. This tracking error is mapped in real-time to wheel drive velocity nodes (`cmd_vel`) using a precisely tuned Proportional-Integral-Derivative (PID) feedback script.
+            </p>
+
+            <h3 class="project-section-heading">The Problem</h3>
+            <p>
+                Integrating camera sensors with motion control requires low latency and high accuracy. A basic line follower can easily lose the track during sharp turns or under changing lighting conditions, leading to control drift and path failures. The challenge was to construct a robust, real-time image processing pipeline that dynamically detects contours, filters out noise, and adjusts steering commands instantly.
+            </p>
+
+            <h3 class="project-section-heading">What We Built</h3>
+            <p>
+                The system was implemented as a clean ROS 2 node architecture, keeping camera input, vision processing, and motor control as separate, well-defined components that communicate over ROS 2 topics. A monocular camera feed captures the track, where the perception node filters the target line color under varying lighting, computes its centroid, and determines the relative offset from the robot's physical center. Positional errors are translated into proportional steering commands. The system was validated in Gazebo simulation across different track geometries and conditions, ensuring that the same codebase executes on physical hardware with minimal changes.
+            </p>
+
+            <h3 class="project-section-heading">Image Processing & Steering Pipeline</h3>
+            <p>
+                The vision control nodes execute frame processing sequentially to output stable steering values at 30 frames per second:
+            </p>
+
+            <div class="tech-pipeline">
+                <div class="pipeline-step">
+                    <div class="pipeline-num">1</div>
+                    <div class="pipeline-detail"><span>IMAGE SUBSCRIBER:</span> Subscribes to the raw camera feed via image transport bridges.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">2</div>
+                    <div class="pipeline-detail"><span>HSV FILTER & MASK:</span> Converts RGB frames to HSV space, applying threshold masks for line isolation.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">3</div>
+                    <div class="pipeline-detail"><span>CENTROID DEVIATION:</span> Analyzes image moments to resolve centroid coordinates (Cx, Cy) and compute offset errors.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">4</div>
+                    <div class="pipeline-detail"><span>PID CONTROLLER:</span> Outputs angular adjustments (`angular.z`) dynamically back to Gazebo differential controllers.</div>
+                </div>
+            </div>
+
+            <h3 class="project-section-heading">What Made It Work</h3>
+            <p>
+                Tuning the OpenCV pipeline was crucial to manage real-world variability, including HSV thresholding adjustments and contour filtering. By maintaining separate, modular ROS 2 nodes, each component could be debugged and optimized independently. This isolated development speeded up PID gain calibration and sensor latency profiling, resulting in smooth navigation and stable recovery.
+            </p>
+
+            <h3 class="project-section-heading">What It Demonstrated</h3>
+            <p>
+                This project built practical competency in computer vision with OpenCV, ROS 2 node development, and the perception-to-action pipeline that underlies almost every real autonomous robot system - from warehouse AMRs to outdoor navigation platforms.
+            </p>
+
+            <h3 class="project-section-heading">Technical Specifications</h3>
+            <div class="tech-spec-grid">
+                <div class="tech-spec-card">
+                    <h4>Perception Subsystems</h4>
+                    <ul>
+                        <li>OpenCV 4 Core Libraries</li>
+                        <li>CvBridge Image Conversion</li>
+                        <li>RGB to HSV Color Masks</li>
+                        <li>Dynamic Thresholding & Filtering</li>
+                        <li>Moment Centroid Calculation</li>
+                    </ul>
+                </div>
+                <div class="tech-spec-card">
+                    <h4>Actuation & Loop Tuning</h4>
+                    <ul>
+                        <li>Proportional Gain (Kp = 0.005)</li>
+                        <li>Derivative Gain (Kd = 0.00025)</li>
+                        <li>Gazebo Camera Sensors Plugin</li>
+                        <li>/cmd_vel Navigation Messages</li>
+                        <li>Python ROS 2 Publisher Nodes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="project-section-heading">Execution & Diagnostic Logging</h3>
+            <p>
+                To launch the camera visual nodes and start the line-tracking simulation modules, run:
+            </p>
+
+            <div class="terminal-block">
+                $ ros2 run my_vision_follower follower_node.py<br>
+                $ ros2 launch my_vision_follower gazebo_track.launch.py
+            </div>
+
+            <p style="margin-top: 30px;">
+                Through OpenCV bounding-box optimization, the processing loops achieved sub-15ms execution speeds per frame, preventing tracking failures at maximum linear velocities.
+            </p>
+
+            <!-- Project Artifacts & Screenshots -->
+            <h3 class="project-section-heading">Project Artifacts & Screenshots</h3>
+            <p>
+                Real-time image processing, mask tracking, and simulation dashboard screenshots from the OpenCV Line Follower ecosystem:
+            </p>
+            <div class="tech-spec-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 20px;">
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(0, 122, 204, 0.15); cursor: pointer;" onclick="openArtifactModal('line follower/1741513830404.jpg')">
+                    <img src="line follower/1741513830404.jpg" alt="Line Follower Robot View" style="width: 100%; height: auto; max-height: 200px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; background: #ffffff; transition: transform 0.3s ease;">
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 8px; font-family: var(--font-body);">Perception Input & Threshold Track Segmentation</div>
+                </div>
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(0, 122, 204, 0.15); cursor: pointer;" onclick="openArtifactModal('line follower/3.jpg')">
+                    <img src="line follower/3.jpg" alt="Centroid Centering Error Log" style="width: 100%; height: auto; max-height: 200px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; background: #ffffff; transition: transform 0.3s ease;">
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 8px; font-family: var(--font-body);">Centroid Centering Logic & Error Deviation Plots</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="https://github.com/ritturonald" target="_blank" class="profile-btn btn-dark" style="padding: 12px 24px; font-size: 0.95rem; text-decoration: none;">
+                    <i class="fa-brands fa-github"></i> View Source Repository on GitHub
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Visual Artifacts Pop-up Modal -->
+    <div id="artifact-modal" class="modal" onclick="closeArtifactModal(event)">
+        <div class="modal-content" style="max-width: 800px; width: 90%; padding: 20px; background: #ffffff; position: relative; border-radius: 8px;">
+            <span class="close-btn" onclick="document.getElementById('artifact-modal').style.display='none'" style="color: var(--accent-amber); font-weight: bold; position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; z-index: 10;">&times;</span>
+            <div id="artifact-modal-body" style="margin-top: 15px; width: 100%; height: 70vh; display: flex; justify-content: center; align-items: center;">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openArtifactModal(fileSrc) {
+            const modal = document.getElementById('artifact-modal');
+            const modalBody = document.getElementById('artifact-modal-body');
+            if (fileSrc.toLowerCase().endsWith('.pdf')) {
+                modalBody.innerHTML = `<iframe src="${fileSrc}" style="width: 100%; height: 100%; border: none; border-radius: 4px;"></iframe>`;
+            } else {
+                modalBody.innerHTML = `<img src="${fileSrc}" alt="Artifact Preview" style="width: 100%; height: auto; max-height: 100%; object-fit: contain; border-radius: 4px; border: 1px solid #e2e8f0;">`;
+            }
+            modal.style.display = 'flex';
+        }
+        
+        function closeArtifactModal(event) {
+            const modal = document.getElementById('artifact-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

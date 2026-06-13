@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Waste Management Robotic Arm | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Project Detail Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* High-tech Pipeline Visualizer */
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects" class="active">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#projects" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Projects
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">Linkage Design</span>
+                <span class="project-badge">Hydraulics</span>
+                <span class="project-badge">SolidWorks FEA</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-circle-check"></i> Actuator Cycles Validated</span>
+            </div>
+            <h1 class="project-title">Construction Waste Management Robotic Arm</h1>
+            <p class="project-meta-desc">Team Project | 2025</p>
+        </header>
+
+        <img src="New folder/con.jpeg" alt="Construction Waste Management Robotic Arm banner" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <h3 class="project-section-heading" style="margin-top: 0;">Project Overview</h3>
+            <p>
+                Construction sites generate enormous volumes of waste - and clearing it is slow, labor-intensive, and potentially hazardous when done manually. This project was about replacing that manual process with a robotic system that could autonomously identify, pick up, and dispose of construction debris with consistent precision and built-in safety.
+            </p>
+
+            <h3 class="project-section-heading">The Problem</h3>
+            <p>
+                Manual waste collection on construction sites is inefficient and exposes workers to physical risk. The challenge was to design a robotic arm system that could handle the full disposal cycle - detection, scooping, transport, and bin placement - reliably and without requiring a human in the loop for routine operation.
+            </p>
+
+            <h3 class="project-section-heading">What We Built</h3>
+            <p>
+                The team designed a front-loader scooping mechanism that mimics the motion of a construction front-loader at a smaller scale. The arm detects waste on the ground using onboard sensors, positions itself for an accurate scoop, and deposits the collected material into a designated disposal bin. The full actuation sequence - approach, scoop, lift, transport, and release - was implemented with validated timing and positional feedback.
+            </p>
+            <p>
+                Multiple fail-safe mechanisms were layered into the system to handle sensor faults, mechanical limits, and unexpected obstructions - ensuring the arm defaults to a safe state rather than continuing an unsafe sequence when anomalies are detected.
+            </p>
+
+            <h3 class="project-section-heading">What Made It Work</h3>
+            <p>
+                The key challenge was making the scooping motion reliable across varied debris positions and surface conditions. Sensor placement and logic were tuned to give the arm enough situational awareness to self-correct during approach, while the fail-safe architecture ensured that no single point of failure could cause an unsafe outcome. The system was validated across multiple test scenarios including irregular waste placement and fault injection.
+            </p>
+
+            <h3 class="project-section-heading">What It Demonstrated</h3>
+            <p>
+                This project demonstrated applied skills in robotic mechanism design, sensor integration, and safety-critical control logic - directly relevant to industrial automation and robotics engineering in real construction and manufacturing environments.
+            </p>
+
+            <h3 class="project-section-heading">Mechanical Analysis Logs</h3>
+            <p>
+                Dynamic simulation solvers track force distributions and linkage yield factors during maximum loading cycles:
+            </p>
+
+            <div class="terminal-block">
+                [SOLVER ONLINE] Dynamic Linkage Torque Solver Initialized<br>
+                [LOAD CASE] Rubble Mass Payload: 12.0 kg (Target Limit: 15.0 kg)<br>
+                [TORQUE] Dynamic J2 Joint Peak Torque: 142.4 Nm<br>
+                [FEA RESULT] Linkage Factor of Safety (FoS): 2.45 (Von-Mises Max Stress: 102.5 MPa) (PASS)
+            </div>
+
+            <p style="margin-top: 30px;">
+                By optimizing link thicknesses and stress distributions, mechanical fatigue is minimized, enabling continuous waste handling under demanding warehouse and field operations.
+            </p>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="index.html#contact" class="profile-btn btn-dark" style="padding: 12px 24px; font-size: 0.95rem;">
+                    <i class="fa-solid fa-envelope"></i> Discuss This Project / Inquire
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

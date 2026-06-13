@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio-Inspired Crashbox | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Project Detail Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+            border-radius: 4px;
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects" class="active">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#projects" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Projects
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">Ansys FEA</span>
+                <span class="project-badge">Fusion 360</span>
+                <span class="project-badge">Structural Analysis</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-circle-check"></i> Impact Verified</span>
+            </div>
+            <h1 class="project-title">Bio-Inspired Crashbox</h1>
+            <p class="project-meta-desc">Team Project | 2025</p>
+        </header>
+
+        <img src="crash box/Screenshot 2026-05-25 113639.png" alt="Bio-Inspired Crashbox banner" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <h3 class="project-section-heading" style="margin-top: 0;">Project Overview</h3>
+            <p>
+                Vehicle crashboxes are designed for one job - absorbing impact energy as efficiently as possible to protect occupants during a collision. The conventional approach works, but nature has been solving the same energy-absorption problem for far longer. This project asked whether biological structures could do it better.
+            </p>
+
+            <h3 class="project-section-heading">The Problem</h3>
+            <p>
+                Standard crashbox geometries are functional but not optimized for maximum energy absorption per unit of material. Biological structures - from bone lattices to beetle shells - have evolved highly efficient load-bearing and energy-dissipating forms over millions of years. The challenge was to identify the right biological analogue, extract the underlying structural principle, and translate it into a crashbox design that could be validated through simulation.
+            </p>
+
+            <h3 class="project-section-heading">What We Built</h3>
+            <p>
+                The team analyzed existing crashbox designs and selected a bio-inspired geometry based on natural energy-absorption structures. The new design was modeled in Fusion 360, capturing the geometric features that give the biological reference its mechanical advantages. Structural impact simulations were then run in Ansys to quantify how the redesigned crashbox performed under collision loading - measuring energy absorption, deformation behavior, and peak force transmission compared to the baseline.
+            </p>
+
+            <h3 class="project-section-heading">What Made It Work</h3>
+            <p>
+                The value of the bio-inspired approach came down to geometry - specifically how the structural form distributes and dissipates impact energy across a greater volume of material rather than concentrating deformation. The Ansys simulation environment allowed the team to iterate on the geometry and directly compare performance metrics, giving a clear picture of where the bio-inspired design improved on convention and where further refinement was needed.
+            </p>
+
+            <h3 class="project-section-heading">What It Demonstrated</h3>
+            <p>
+                This project developed practical skills in CAD modelling, FEA simulation, and design-for-performance thinking - and demonstrated how cross-disciplinary thinking, drawing on biology to solve an engineering problem, can open up design directions that purely conventional approaches would miss.
+            </p>
+
+            <h3 class="project-section-heading">FEA Impact Simulation Logs</h3>
+            <p>
+                Simulated collision load outputs indicate high energy dissipation characteristics at maximum deformation vectors:
+            </p>
+
+            <div class="terminal-block">
+                [ANSYS EXPLICIT STR] Solver initialized successfully.<br>
+                [LOAD CASE] Collision velocity: 15.0 m/s (54.0 km/h) | Rigid wall impact<br>
+                [ENERGY] Specific Energy Absorption (SEA): 18.4 kJ/kg (Baseline: 14.2 kJ/kg)<br>
+                [DEFORMATION] Mean crushing force: 42.5 kN | Deformation efficiency: 78.4% (PASS)
+            </div>
+
+            <p style="margin-top: 30px;">
+                By utilizing bio-inspired geometry structures, structural deceleration forces transmitted to the chassis were decreased by over 20%, dramatically improving passenger compartment structural safety.
+            </p>
+
+            <!-- Project Artifacts & Screenshots -->
+            <h3 class="project-section-heading">Project Artifacts & Screenshots</h3>
+            <p>
+                Finite Element Analysis (FEA) deformation and energy absorption screenshots from the Bio-Inspired Crashbox impact simulation:
+            </p>
+            <div class="tech-spec-grid" style="grid-template-columns: 1fr; max-width: 600px; margin: 20px auto;">
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(0, 122, 204, 0.15); cursor: pointer;" onclick="openArtifactModal('crash box/Screenshot 2026-05-25 113639.png')">
+                    <img src="crash box/Screenshot 2026-05-25 113639.png" alt="Ansys Impact Simulation" style="width: 100%; height: auto; max-height: 400px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; background: #ffffff; transition: transform 0.3s ease;">
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 8px; font-family: var(--font-body);">Ansys Explicit Dynamics Crash Deformation Contour</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <a href="https://github.com/rakesh001n/bioinspired-crashbox" target="_blank" class="profile-btn btn-dark" style="padding: 12px 24px; font-size: 0.95rem; text-decoration: none;">
+                    <i class="fa-brands fa-github"></i> View Repository
+                </a>
+                <a href="index.html#contact" class="profile-btn btn-dark" style="padding: 12px 24px; font-size: 0.95rem; text-decoration: none;">
+                    <i class="fa-solid fa-envelope"></i> Discuss / Inquire
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Visual Artifacts Pop-up Modal -->
+    <div id="artifact-modal" class="modal" onclick="closeArtifactModal(event)">
+        <div class="modal-content" style="max-width: 800px; width: 90%; padding: 20px; background: #ffffff; position: relative; border-radius: 8px;">
+            <span class="close-btn" onclick="document.getElementById('artifact-modal').style.display='none'" style="color: var(--accent-amber); font-weight: bold; position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; z-index: 10;">&times;</span>
+            <div id="artifact-modal-body" style="margin-top: 15px; width: 100%; height: 70vh; display: flex; justify-content: center; align-items: center;">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openArtifactModal(fileSrc) {
+            const modal = document.getElementById('artifact-modal');
+            const modalBody = document.getElementById('artifact-modal-body');
+            if (fileSrc.toLowerCase().endsWith('.pdf')) {
+                modalBody.innerHTML = `<iframe src="${fileSrc}" style="width: 100%; height: 100%; border: none; border-radius: 4px;"></iframe>`;
+            } else {
+                modalBody.innerHTML = `<img src="${fileSrc}" alt="Artifact Preview" style="width: 100%; height: auto; max-height: 100%; object-fit: contain; border-radius: 4px; border: 1px solid #e2e8f0;">`;
+            }
+            modal.style.display = 'flex';
+        }
+        
+        function closeArtifactModal(event) {
+            const modal = document.getElementById('artifact-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond the Blueprint | About Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Premium Editorial Subpage Style Override */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .about-editorial-header {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .about-editorial-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .about-editorial-subtitle {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .about-editorial-subtitle span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .editorial-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+        }
+
+        /* Continuous Reading Paragraph Flow */
+        .editorial-body {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #334155;
+        }
+
+        /* Lead Paragraph Styling */
+        .editorial-body .lead-paragraph {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            font-weight: 700;
+            border-left: 4px solid var(--accent-amber);
+            padding-left: 25px;
+            margin-bottom: 35px;
+            background: rgba(212, 136, 6, 0.03);
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 6px 6px 0;
+            text-align: justify;
+        }
+
+        .editorial-body p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        /* Floated Magazine Image Containers */
+        .editorial-img-container {
+            width: 45%;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 8px;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .editorial-img-container:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 25px rgba(0, 122, 204, 0.08);
+        }
+
+        .editorial-img-container.float-right {
+            float: right;
+            margin-left: 30px;
+        }
+
+        .editorial-img-container.float-left {
+            float: left;
+            margin-right: 30px;
+        }
+
+        .editorial-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .editorial-caption {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.78rem;
+            font-family: var(--font-body);
+            color: #64748b;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Highlight styled synthesis paragraph for continuous read */
+        .editorial-body .synthesis-paragraph {
+            border-left: 4px solid var(--accent-cyan);
+            padding-left: 20px;
+            background: rgba(0, 122, 204, 0.02);
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 0 4px 4px 0;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .editorial-img-container {
+                width: 100%;
+                float: none !important;
+                margin: 20px 0 !important;
+            }
+            .editorial-content-wrapper {
+                padding: 40px 20px;
+            }
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about" class="active">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Subpage Container -->
+    <div class="subpage-container">
+        
+        <a href="index.html#about" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Profile
+        </a>
+
+        <header class="about-editorial-header">
+            <h1 class="about-editorial-title">Beyond the Blueprint</h1>
+            <p class="about-editorial-subtitle">Not all of me fits in a resume. This is the rest.</p>
+        </header>
+
+        <main class="editorial-content-wrapper clearfix">
+            
+            <article class="editorial-body">
+                
+                <p class="lead-paragraph">
+                    There are two versions of me. One speaks in circuits, control systems and code. The other speaks in open roads, early mornings and the quiet click of a camera shutter. Both are equally me. And somehow, they make each other better.
+                </p>
+
+                <!-- Travel Section with Portrait Photo -->
+                <div class="editorial-img-container float-right">
+                    <img src="gallery/me.jpeg" alt="Rittu Ronald Portrait" class="editorial-img">
+                    <span class="editorial-caption">Rittu Ronald // Beyond the Blueprint</span>
+                </div>
+
+                <p>
+                    I'm a traveller at heart. Not the kind who ticks destinations off a list or chases the perfect photograph - but the kind who sits in a roadside tea stall in an unknown town, watches the world move at its own pace, and feels something quietly shift inside. I don't travel to escape my life. I travel because every new place hands me a slightly different version of myself to bring back home. Every winding road, every strange skyline, every meal eaten alone at a table for one - they all add up to something I can't quite name but wouldn't trade for anything.
+                </p>
+
+                <p>
+                    I romanticize the journey. The long bus rides with fogged windows. The towns that don't appear on popular maps. The feeling of being completely unknown somewhere and finding that oddly freeing. There is something deeply humbling about stepping into a place where nobody knows your name, your degree, or your ambitions and realizing that you are still whole.
+                </p>
+
+                <!-- Photography Section with Moon Photo -->
+                <div class="editorial-img-container float-left">
+                    <img src="gallery/moon.jpeg" alt="Moon Capture" class="editorial-img">
+                    <span class="editorial-caption">Mobile Photography // Moon Capture</span>
+                </div>
+
+                <p>
+                    I carry my phone like most engineers carry a notebook - always ready to catch what the eye almost missed. I'm a mobile photographer, drawn to the quiet moments that happen between the loud ones. The way light falls on an old wall at 6pm. A stranger laughing at something just out of frame. The reflection of a city in a puddle after rain. I don't shoot to impress - I shoot to remember. Photography taught me something engineering never quite could - that sometimes the most important thing isn't fixing what's in front of you but truly seeing it first.
+                </p>
+
+                <p>
+                    I run in the mornings - before the notifications, before the noise, before the world has decided what kind of day it's going to be. The road at that hour belongs to almost no one, and for a little while, it belongs entirely to me. It's not about pace or distance. It's about showing up for yourself before anyone else asks you to show up for them. Some of my clearest thinking happens in those early miles - problems untangle themselves, ideas arrive uninvited, and the sky puts on a show that no screen could ever replicate.
+                </p>
+
+                <!-- Books Section with Sea Photo -->
+                <div class="editorial-img-container float-right">
+                    <img src="gallery/sea.jpeg" alt="Sea Horizon" class="editorial-img">
+                    <span class="editorial-caption">Mobile Photography // Sea Horizon</span>
+                </div>
+
+                <p>
+                    And then there are books. I read slowly and deliberately - not to finish, but to feel. I've learned more about patience from a novel than from any textbook, more about systems thinking from a biography than any lecture. Books have a way of sitting with you long after you've closed them, quietly rearranging the furniture inside your mind. I believe a person who reads widely thinks differently - more layered, more empathetic, more willing to sit with complexity rather than rush toward a simple answer.
+                </p>
+
+                <p>
+                    What ties all of this together - the travel, the running, the reading, the photography - is curiosity. The same restlessness that makes me want to understand how a system fails before it actually does is the same one that makes me want to take the longer route home, raise my phone to catch a fleeting light, start a book I know nothing about, or wake up early just to see what the morning looks like from a different street.
+                </p>
+
+                <p class="synthesis-paragraph">
+                    Engineering taught me how to solve problems. Travel taught me which problems are worth solving. Running taught me discipline without rigidity. Photography taught me how to see before I act. And books taught me that every answer opens three new questions and that's not a problem. That's the whole point.
+                </p>
+
+                <p>
+                    I am, at my core, someone who believes that a life fully lived and a career fully pursued are not two separate things. They feed each other. They sharpen each other. And the best version of my work has always come from the best version of my living.
+                </p>
+
+                <!-- Sneak Peek Section -->
+                <div class="sneak-peek-container fade-in" style="margin-top: 60px;">
+                    <h2 style="font-size: 2rem; margin-bottom: 25px; border-bottom: 2px solid var(--accent-amber); display: inline-block; padding-bottom: 8px;">A Sneak Peek into My Life</h2>
+                    <div class="sneak-peek-grid">
+                        <div class="sneak-peek-card">
+                            <img src="photos/WhatsApp Image 2026-05-25 at 11.30.18.jpeg" alt="Autonomous SLAM Robot" class="sneak-peek-img">
+                            <span class="sneak-peek-caption">Autonomous SLAM Robot</span>
+                        </div>
+                        <div class="sneak-peek-card">
+                            <img src="photos/WhatsApp Image 2026-05-25 at 11.27.52(1).jpeg" alt="Wireless Power Coils" class="sneak-peek-img">
+                            <span class="sneak-peek-caption">Wireless Power Coils</span>
+                        </div>
+                        <div class="sneak-peek-card">
+                            <img src="photos/WhatsApp Image 2026-05-25 at 11.26.12.jpeg" alt="Football Turf Match" class="sneak-peek-img">
+                            <span class="sneak-peek-caption">Football Turf Match</span>
+                        </div>
+                        <div class="sneak-peek-card">
+                            <img src="photos/WhatsApp Image 2026-05-25 at 11.15.07.jpeg" alt="Mountain Trekking" class="sneak-peek-img">
+                            <span class="sneak-peek-caption">Mountain Trekking</span>
+                        </div>
+                        <div class="sneak-peek-card">
+                            <img src="photos/WhatsApp Image 2026-05-25 at 11.37.39.jpeg" alt="Billiards / Pool" class="sneak-peek-img">
+                            <span class="sneak-peek-caption">Billiards / Pool</span>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rittu Ronald | Mechatronics & Automation Engineer</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring">
+            <span class="cursor-reticle-tick tick-top"></span>
+            <span class="cursor-reticle-tick tick-right"></span>
+            <span class="cursor-reticle-tick tick-bottom"></span>
+            <span class="cursor-reticle-tick tick-left"></span>
+        </div>
+        <div class="cursor-coords">[X: 0000, Y: 0000]</div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Rittu<span>Ronald</span></div>
+        <ul>
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-controls">
+            <!-- Audio Toggle (Default Muted) -->
+            <button id="audio-toggle" class="control-btn" title="Toggle Sci-Fi Audio Systems" aria-label="Toggle Audio">
+                <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section Wrapper for Scroll Pinning -->
+    <section id="hero" class="hero-scroll-container">
+        <div class="hero-sticky-wrapper">
+            
+            <!-- Base Layer (Light theme, Black text) -->
+            <div class="hero-layer hero-base-layer">
+
+                
+                <!-- 3D Interactive Robot Arm Container -->
+                <div id="robot-3d-container"></div>
+                
+                <div class="hero-content">
+                    <div class="hero-text-group">
+                        <h1 class="hero-title">Hi <span class="wave-emoji">👋🏾</span><br>I'm Rittu Ronald</h1>
+                        
+                        <div class="hero-description-block">
+                            <div class="typewriter-container typewriter-base"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-links-vertical" style="opacity: 0; pointer-events: none;">
+                        <a href="#">LinkedIn</a>
+                        <a href="#">GitHub</a>
+                        <a href="#">Download CV</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reveal Layer (Dark portrait theme, White text) -->
+            <div class="hero-layer hero-reveal-layer">
+                <div class="hero-face-img-bg">
+                    <img src="photos/b0050c67-e4cf-47d4-a950-ee1bc180b336.jpg" alt="Rittu Ronald" class="hero-portrait-img">
+                    <div class="hero-face-overlay-dark"></div>
+                </div>
+
+                <div class="hero-content white-content">
+                    <div class="hero-text-group">
+                        <h1 class="hero-title" style="text-align: right !important;">Hi <span class="wave-emoji">👋🏾</span><br>I'm Rittu Ronald</h1>
+                        
+                        <div class="hero-description-block">
+                            <p class="hero-description-text">
+                                I build Mechatronic systems that move with purpose and intelligence that predicts failure before it happens.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-links-vertical">
+                        <a href="https://linkedin.com/in/ritturonald" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/ritturonald" target="_blank">GitHub</a>
+                        <a href="rittu resume v7.pdf" download="Rittu_Ronald_Resume.pdf" class="cv-link">Download CV</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <!-- Profile Card (Akshet-style) -->
+        <div class="about-profile-card fade-in">
+            <div class="profile-left">
+                <img src="photos/b0050c67-e4cf-47d4-a950-ee1bc180b336.jpg" alt="Rittu Ronald" class="profile-pic">
+            </div>
+            <div class="profile-right">
+                <h1 class="profile-name">Rittu Ronald</h1>
+                
+                <!-- Styled Badge Tags below name -->
+                <div class="profile-tags">
+                    <span class="profile-tag">Mechatronics & Automation</span>
+                    <span class="profile-tag">Robotics Developer</span>
+                    <span class="profile-tag">Research Enthusiast</span>
+                    <span class="profile-tag">Predictive Maintenance</span>
+                </div>
+
+                <!-- Contact Grid -->
+                <div class="profile-contacts" style="margin-top: 15px;">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope" style="color: #ef4444;"></i>
+                        <span>ritturonald.rm@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone" style="color: #007acc;"></i>
+                        <span>+91 6379761638</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot" style="color: #22c55e;"></i>
+                        <span>Chennai, India</span>
+                    </div>
+                </div>
+
+                <!-- Buttons without Twitter -->
+                <div class="profile-buttons" style="margin-bottom: 25px;">
+                    <a href="https://github.com/ritturonald" target="_blank" class="profile-btn btn-dark">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/ritturonald" target="_blank" class="profile-btn btn-dark">
+                        <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="rittu resume v7.pdf" download="Rittu_Ronald_Resume.pdf" class="profile-btn btn-dark cv-link">
+                        <i class="fa-solid fa-download"></i> Download My Resume
+                    </a>
+                </div>
+
+                <!-- Integrated Biography Block -->
+                <div class="profile-bio" style="margin-top: 10px; border-top: 1px solid #f1f5f9; padding-top: 25px;">
+                    <h3 class="bio-heading">About Me</h3>
+                    <p class="about-intro">
+                        I'm Rittu Ronald - a Mechatronics & Automation Engineering student at VIT Chennai, building systems that move with purpose and predict failure before it happens.
+                    </p>
+                    <p>
+                        From the propulsion labs of ISRO to the factory floors of Ashok Leyland and Rane Madras, to the research halls of IIT Madras - I've worked across robotics, industrial automation, and predictive maintenance, contributed to Mars rover development, and filed a patent. All before finishing my degree.
+                    </p>
+                    <p class="about-punchline">
+                        I don't just study engineering. <span>I ship it.</span>
+                    </p>
+                    
+                    <a href="about.html" class="profile-btn btn-dark" style="margin-top: 25px;">
+                        <i class="fa-solid fa-book-open"></i> Read More About My Journey
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic & Professional Stats Grid -->
+        <div class="stats-grid fade-in">
+            <div class="stat-card">
+                <div class="stat-label">Academics</div>
+                <div class="stat-number">8.74</div>
+                <div class="stat-subtext">B.Tech CGPA</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Engineering</div>
+                <div class="stat-number alt-color">10</div>
+                <div class="stat-subtext">Projects Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Intellectual Property</div>
+                <div class="stat-number">1</div>
+                <div class="stat-subtext">Filed Patent</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Publications</div>
+                <div class="stat-number alt-color">1</div>
+                <div class="stat-badge">Under Review</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Professional</div>
+                <div class="stat-number">4</div>
+                <div class="stat-subtext">Internships</div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="skills-section-wrapper fade-in">
+            <h3>Skills</h3>
+            <p style="margin-bottom: 30px;">Below is a list of some of the skills I have acquired during my career so far! I am constantly learning new and exciting skills.</p>
+            
+            <div class="skills-tabs">
+                <button class="skill-tab-btn" data-category="programming">Programming Languages</button>
+                <button class="skill-tab-btn" data-category="robotics">Robotics & Simulation</button>
+                <button class="skill-tab-btn" data-category="ai">Artificial Intelligence</button>
+                <button class="skill-tab-btn" data-category="cad">3D Modeling & CAD/FEA</button>
+                <button class="skill-tab-btn" data-category="plc">Automation & PLC</button>
+                <button class="skill-tab-btn" data-category="pcb">PCB Design & Electronics</button>
+                <button class="skill-tab-btn" data-category="hardware">Hardware & Microcontrollers</button>
+                <button class="skill-tab-btn" data-category="web">Web Development</button>
+                <button class="skill-tab-btn" data-category="analytics">Data Analytics</button>
+            </div>
+            
+            <div class="skills-display-grid" id="skills-display-grid">
+                <!-- Injected dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <h2 class="fade-in">Education</h2>
+        <div class="education-card fade-in">
+            <div class="edu-images">
+                <img src="vit image.jpg" alt="VIT Chennai Campus" class="edu-campus">
+                <img src="vit logo.jpg" alt="VIT Chennai Logo" class="edu-logo">
+            </div>
+            <div class="edu-details">
+                <h3 class="edu-title">Vellore Institute of Technology, Chennai</h3>
+                <p class="edu-location">Chennai, India</p>
+                <p class="edu-degree">Bachelor of Technology - Mechatronics and Automation;<br> CGPA: 8.74/10</p>
+                <p class="edu-duration">June 2023 - 2027</p>
+
+                <div class="edu-focus">
+                    <h4>Focused on:</h4>
+                    <ul>
+                        <li>Engineering Mathematics (I, II, III, IV)</li>
+                        <li>Theory of Machines</li>
+                        <li>Control Systems</li>
+                        <li>Mechatronics System Design</li>
+                        <li>Microprocessors and Microcontrollers</li>
+                        <li>PLC</li>
+                        <li>Industrial Robotics</li>
+                        <li>Robot Path Planning and Control</li>
+                        <li>Artificial Intelligence</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section id="experience">
+        <div class="exp-section-header fade-in">
+            <h2>Experiences</h2>
+            <p>My Academic & Professional Journey</p>
+            <div class="exp-line"></div>
+        </div>
+
+        <!-- Interactive Logo Switcher Row -->
+        <div class="timeline-logos-row fade-in">
+            <div class="logo-btn active btn-ashok" data-target="exp-ashok" onclick="scrollToExperience('exp-ashok')">
+                <img src="Internship/ashok leyland.jpg" alt="Ashok Leyland">
+            </div>
+            <div class="logo-btn btn-iit" data-target="exp-iit" onclick="scrollToExperience('exp-iit')">
+                <img src="Internship/iit_madras.jpg" alt="IIT Madras">
+            </div>
+            <div class="logo-btn btn-rane" data-target="exp-rane" onclick="scrollToExperience('exp-rane')">
+                <img src="photos/rane_transparent.png" alt="Rane Madras">
+            </div>
+            <div class="logo-btn btn-isro" data-target="exp-isro" onclick="scrollToExperience('exp-isro')">
+                <img src="Internship/ISRO.jpg" alt="ISRO">
+            </div>
+            <div class="logo-btn btn-humanoid" data-target="exp-humanoid" onclick="scrollToExperience('exp-humanoid')">
+                <img src="Internship/humanoidx.png" alt="HumanoidXVITCC">
+            </div>
+            <div class="logo-btn btn-movis" data-target="exp-movis" onclick="scrollToExperience('exp-movis')">
+                <img src="Internship/movis.png" alt="Team MOVIS">
+            </div>
+        </div>
+
+        <!-- Vertical Interactive Timeline -->
+        <div class="timeline-container fade-in">
+            <!-- Vertical central line -->
+            <div class="timeline-vertical-line"></div>
+
+            <!-- Experience 1: Ashok Leyland (Right Card) -->
+            <div class="timeline-item left-date" id="exp-ashok">
+                <div class="timeline-date-location">
+                    <span class="timeline-date">May 11, 2026 - June 10, 2026</span>
+                    <span class="timeline-location">Cab Panel Press Shop (CPPS)</span>
+                    <p style="font-size: 0.82rem; color: var(--accent-amber); font-weight: 700; margin-top: 15px; font-family: var(--font-body); border-left: 2px solid var(--accent-amber); padding-left: 12px; text-transform: none; text-align: right; line-height: 1.4; max-width: 320px; font-style: italic; margin-left: auto;">
+                        Predictive maintenance looks like a maintenance problem until you realize it's really a data problem. Ashok Leyland taught me how to turn machine signals into decisions before failures become downtime.
+                    </p>
+                </div>
+                <div class="timeline-node">
+                    <img src="Internship/ashok leyland.jpg" alt="Ashok Leyland Node">
+                </div>
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <h3>Ashok Leyland</h3>
+                        <h4>Project Intern | Cab Panel Press Shop</h4>
+                    </div>
+                    <div class="timeline-card-img-container" style="background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 20px 20px 45px; box-sizing: border-box;">
+                        <img src="Internship/ashok leyland.jpg" alt="Ashok Leyland Logo" style="object-fit: contain; max-height: 100%; max-width: 100%; width: auto; height: auto;">
+                        <span class="img-caption">Industry 4.0 Predictive Maintenance & Quality Inspection</span>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6; text-align: justify;">
+                            Worked at Ashok Leyland's Cab Panel Press Shop (CPPS), where I developed Industry 4.0-based solutions focused on predictive maintenance, condition monitoring, and automated quality inspection. Designed frameworks for monitoring servo motors, gearboxes, hydraulic systems, cooling circuits, and automotive body panel quality using sensor analytics, machine vision, and data-driven maintenance strategies to support Zero Downtime and Zero Defect Manufacturing initiatives.
+                        </p>
+                        <ul class="timeline-bullet-list">
+                            <li><strong>Predictive Maintenance:</strong> Designed vibration analysis and motor current signature analysis (MCSA) models to monitor servo motors and gearboxes.</li>
+                            <li><strong>Condition Monitoring:</strong> Developed sensor telemetry frameworks for tracking hydraulic press clutch wear, cooling scaling, and hydraulic oil health.</li>
+                            <li><strong>Quality Inspection:</strong> Proposed inline 3D machine vision and AI anomaly detection systems to automate automotive body panel QC checks.</li>
+                        </ul>
+                        <div class="timeline-card-actions">
+                            <a href="experience-ashok.html" class="timeline-know-me-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Know Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience 2: IIT Madras (Left Card) -->
+            <div class="timeline-item right-date" id="exp-iit">
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <h3>IIT Madras</h3>
+                        <h4>Research Intern</h4>
+                    </div>
+                    <div class="timeline-card-img-container" style="background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 20px 20px 45px; box-sizing: border-box;">
+                        <img src="Internship/iit_madras.jpg" alt="IIT Madras Logo" style="object-fit: contain; max-height: 100%; max-width: 100%; width: auto; height: auto;">
+                        <span class="img-caption">Inductive Wireless Power Transfer Lab</span>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6; text-align: justify;">
+                            Worked at one of India's most respected research institutions on a problem that sits at the cutting edge of EV technology - designing and simulating wireless power transfer coils for electric vehicle charging, where the goal is to move energy without a single wire touching.
+                        </p>
+                        <ul class="timeline-bullet-list">
+                            <li><strong>Coil Design:</strong> Designed and 3D modelled 3 distinct WPT coil structures - single layer, double layer, and triple layer - each with unique electromagnetic tradeoffs.</li>
+                            <li><strong>ANSYS Simulation:</strong> Ran eddy current analysis at 85kHz on all structures in ANSYS Electronics Desktop, extracting self-inductance and mutual-inductance matrices.</li>
+                            <li><strong>EMI Shielding:</strong> Investigated passive, active, and hybrid aluminum + ferrite shielding strategies to contain electromagnetic field leakage within ICNIRP safety limits.</li>
+                        </ul>
+                        <div class="timeline-card-actions">
+                            <a href="experience-iit.html" class="timeline-know-me-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Know Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-node">
+                    <img src="Internship/iit_madras.jpg" alt="IIT Madras Node">
+                </div>
+                <div class="timeline-date-location">
+                    <span class="timeline-date">May 19, 2025 - July 19, 2025</span>
+                    <span class="timeline-location">Chennai, India</span>
+                    <p style="font-size: 0.82rem; color: var(--accent-amber); font-weight: 700; margin-top: 15px; font-family: var(--font-body); border-left: 2px solid var(--accent-amber); padding-left: 12px; text-transform: none; text-align: left; line-height: 1.4; max-width: 320px; font-style: italic;">
+                        Coil design looks like a geometry problem until the electromagnetic fields start leaking. Then it becomes a safety problem. IIT Madras taught me to see both at once.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Experience 3: Rane Madras (Right Card) -->
+            <div class="timeline-item left-date" id="exp-rane">
+                <div class="timeline-date-location">
+                    <span class="timeline-date">05 Aug 2024 - 21 Nov 2024</span>
+                    <span class="timeline-location">Manufacturing Engineering Dept.</span>
+                    <p style="font-size: 0.82rem; color: var(--accent-amber); font-weight: 700; margin-top: 15px; font-family: var(--font-body); border-left: 2px solid var(--accent-amber); padding-left: 12px; text-transform: none; text-align: right; line-height: 1.4; max-width: 320px; font-style: italic; margin-left: auto;">
+                        Most projects start with a blank page. Rane started with a broken machine, missing documentation, and a deadline. That gap between theory and shop floor is where the real engineering lives.
+                    </p>
+                </div>
+                <div class="timeline-node">
+                    <img src="photos/rane_transparent.png" alt="Rane Node">
+                </div>
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <h3>Rane (Madras) Limited</h3>
+                        <h4>Project Intern</h4>
+                    </div>
+                    <div class="timeline-card-img-container" style="background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 20px 20px 45px; box-sizing: border-box;">
+                        <img src="photos/rane_transparent.png" alt="Rane Madras Logo" style="object-fit: contain; max-height: 100%; max-width: 100%; width: auto; height: auto;">
+                        <span class="img-caption">FEA Stress Rig & Deflection Contours</span>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6; text-align: justify;">
+                            Worked with Rane Madras Limited on a precision manufacturing problem - diagnosing and upgrading an automated steering rack bend correction machine that had drifted out of reliable operation, while simultaneously designing what a smarter, next-generation version of it could look like.
+                        </p>
+                        <ul class="timeline-bullet-list">
+                            <li><strong>Force Analysis:</strong> Derived beam-deflection formulas for steel racks and validated corrective force calculations against ANSYS static structural simulation across five deflection cases.</li>
+                            <li><strong>Perception Redesign:</strong> Designed three sensing alternatives to replace the failing LVDT lever setup - LASER triangulation, a Computer Vision / Simulink pipeline, and a halo-based 4-LVDT array.</li>
+                            <li><strong>Machine Overhaul:</strong> Identified root causes of measurement failure, designed a solenoid drop-type LVDT positioning system, and proposed an IoT-SCADA framework for remote monitoring and digitalization.</li>
+                        </ul>
+                        <div class="timeline-card-actions">
+                            <a href="experience-rane.html" class="timeline-know-me-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Know Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience 4: ISRO IPRC (Left Card) -->
+            <div class="timeline-item right-date" id="exp-isro">
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <h3>ISRO Propulsion Complex</h3>
+                        <h4>In-Plant Trainee</h4>
+                    </div>
+                    <div class="timeline-card-img-container">
+                        <img src="photos/isro image 1.jpg" alt="ISRO Traineeship Engine Details">
+                        <span class="img-caption">Liquid Propulsion Vikas Engine Assembly Details</span>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6; text-align: justify;">
+                            Trained at the engine room of Indian spaceflight - where rocket propulsion systems are assembled, tested and cleared before powering India's launch vehicles into orbit.
+                        </p>
+                        <ul class="timeline-bullet-list">
+                            <li><strong>Propulsion Assembly:</strong> Studied assembly of Vikas, Cryo & Semi-Cryo engines powering PSLV and GSLV missions.</li>
+                            <li><strong>Controls & Instrumentation:</strong> Analyzed PLC-automated test facilities monitoring pressures, temperatures, and propellant flows.</li>
+                            <li><strong>Aerospace Fabrication:</strong> Observed CNC machining, orbital TIG welding, and precision aerospace manufacturing techniques.</li>
+                        </ul>
+                        <div class="timeline-card-actions">
+                            <a href="experience-isro.html" class="timeline-know-me-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Know Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-node">
+                    <img src="Internship/ISRO.jpg" alt="ISRO Node">
+                </div>
+                <div class="timeline-date-location">
+                    <span class="timeline-date">14 June 2024 - 28 June 2024</span>
+                    <span class="timeline-location">Mahendragiri, India</span>
+                    <p style="font-size: 0.82rem; color: var(--accent-amber); font-weight: 700; margin-top: 15px; font-family: var(--font-body); border-left: 2px solid var(--accent-amber); padding-left: 12px; text-transform: none; text-align: left; line-height: 1.4; max-width: 320px; font-style: italic;">
+                        Industrial mechatronics teaches you how machines work. ISRO taught me what happens when they can't afford to fail.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Experience 5: HumanoidXVITCC (Right Card) -->
+            <div class="timeline-item left-date" id="exp-humanoid">
+                <div class="timeline-date-location">
+                    <span class="timeline-date">March 2025 - Present</span>
+                    <span class="timeline-location">VIT Chennai</span>
+                </div>
+                <div class="timeline-node">
+                    <img src="Internship/humanoidx.png" alt="HumanoidXVITCC Node">
+                </div>
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <h3>HumanoidX VITCC</h3>
+                        <h4>Programming Lead</h4>
+                    </div>
+                    <div class="timeline-card-img-container">
+                        <img src="Internship/humanoidx.png" alt="HumanoidXVITCC Robot Systems" style="object-fit: contain; padding: 20px; background: #fafafa;">
+                        <span class="img-caption">ROS2 Implementations & Legged Mobile Robotics</span>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6; text-align: justify;">
+                            Leading the programming division of VIT Chennai's humanoid robotics club - writing code, organizing events, and making sure the next generation of roboticists at VIT actually know what they're doing.
+                        </p>
+                        <ul class="timeline-bullet-list">
+                            <li><strong>Working with Software:</strong> Driving ROS2 integration across humanoid robotics projects, bridging hardware control with intelligent software behaviour.</li>
+                            <li><strong>Events Organized:</strong> Core organizer behind two flagship club events - the 2-day ROS2 Workshop and Synthetix, a robotics-focused technical event.</li>
+                            <li><strong>Mentorship:</strong> Actively guiding juniors through their robotics projects - from concept to working prototype.</li>
+                        </ul>
+                        <div class="timeline-card-actions">
+                            <a href="experience-humanoid.html" class="timeline-know-me-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Know Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience 6: Team MOVIS (Left Card) -->
+            <div class="timeline-item right-date" id="exp-movis">
+                <div class="timeline-card">
+                    <div class="timeline-card-header">
+                        <h3>Team MOVIS</h3>
+                        <h4>Mechatronics Engineer</h4>
+                    </div>
+                    <div class="timeline-card-img-container">
+                        <img src="Internship/movis.png" alt="Team MOVIS Rover Systems" style="object-fit: contain; padding: 20px; background: #fafafa;">
+                        <span class="img-caption">Space Exploration Rover & Mars Drone Systems</span>
+                    </div>
+                    <div class="timeline-card-body">
+                        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px; line-height: 1.6; text-align: justify;">
+                            Part of VIT Chennai's elite space technology team - building rovers, combat bots, and competing on stages that go from Delhi to NASA. MOVIS doesn't just participate in competitions. It shows up, takes hits, repairs at midnight, and comes back stronger.
+                        </p>
+                        <ul class="timeline-bullet-list">
+                            <li><strong>NASA HERC 2024-25:</strong> Contributed to the ideation round of NASA's Human Exploration Rover Challenge - developing rover concepts evaluated against NASA's engineering standards.</li>
+                            <li><strong>Technoxian 2024 - Delhi:</strong> Built and competed with a combat robot at one of India's biggest international robotics competitions - ranked top 15 globally on a minimal budget.</li>
+                            <li><strong>Ideation Rounds:</strong> Selected for ideation stages at ISRO IROC and Gujarat Techfest - pushing rover and robotics concepts from whiteboard to competition floor.</li>
+                        </ul>
+                        <div class="timeline-card-actions">
+                            <a href="experience-movis.html" class="timeline-know-me-btn">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Know Me
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-node">
+                    <img src="Internship/movis.png" alt="MOVIS Node">
+                </div>
+                <div class="timeline-date-location">
+                    <span class="timeline-date">April 2024 - July 2025</span>
+                    <span class="timeline-location">VIT Chennai Special University Team</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="fade-in">Projects</h2>
+        <div class="grid fade-in" id="projects-grid">
+            <!-- Dynamic Projects Go Here -->
+        </div>
+        <div style="text-align: center; margin-top: 40px;" class="fade-in">
+            <a href="projects.html" class="btn" style="display: inline-block;">More Projects // View All</a>
+        </div>
+    </section>
+
+    <!-- Active Clubs & Technical Societies Section -->
+    <section id="clubs" class="clubs-section">
+        <div class="skills-section-wrapper fade-in">
+            <h2 class="clubs-section-title">Active Technical Societies</h2>
+            <p class="clubs-section-subtitle">Clubs & student communities where I actively contribute, mentor, and build</p>
+            
+            <div class="clubs-grid">
+                <!-- Club 1: IEEE RAS -->
+                <div class="club-card">
+                    <div>
+                        <div class="club-card-header">
+                            <img src="Internship/ieee ras.png" alt="IEEE RAS" class="club-card-logo">
+                            <div>
+                                <h3 class="club-card-title">IEEE RAS VIT Chennai</h3>
+                                <p class="club-card-role">Project Team Member</p>
+                            </div>
+                        </div>
+                        <ul class="club-card-body-list">
+                            <li><strong>Project Development:</strong> Participated in collaborative robotics and automation projects, bridging mechanical designs with embedded firmware.</li>
+                            <li><strong>Technical Guidance:</strong> Led practical hands-on workshops on microcontrollers, ROS2 nodes, and signal filtering for junior members.</li>
+                            <li><strong>System Verification:</strong> Conducted unit testing and debugging for multi-sensor integration loops, verifying controller latency.</li>
+                        </ul>
+                    </div>
+                    <div class="club-card-footer">
+                        <span class="club-card-date"><i class="fa-regular fa-calendar" style="margin-right: 5px;"></i> August 2024 - October 2025</span>
+                        <a href="experience-ieee.html" class="timeline-know-me-btn" style="padding: 6px 14px; font-size: 0.78rem;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Know More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Club 2: Zero Bugs Club -->
+                <div class="club-card">
+                    <div>
+                        <div class="club-card-header">
+                            <img src="Internship/zbc.png" alt="Zero Bugs Club" class="club-card-logo">
+                            <div>
+                                <h3 class="club-card-title">Zero Bugs Club (ZBC)</h3>
+                                <p class="club-card-role">Technical Team Member</p>
+                            </div>
+                        </div>
+                        <ul class="club-card-body-list">
+                            <li><strong>Event Organization:</strong> Contributed to technical event organization and successfully conducted "Tech Villa" hackathon.</li>
+                            <li><strong>Technical Mentoring:</strong> Supported coordination, networking activities, and digital outreach for competitive programming setups.</li>
+                            <li><strong>Hardware Debugging:</strong> Assisted participants with real-time debugging of embedded logic, sensor calibration, and microcontroller issues.</li>
+                        </ul>
+                    </div>
+                    <div class="club-card-footer">
+                        <span class="club-card-date"><i class="fa-regular fa-calendar" style="margin-right: 5px;"></i> April 2024 - July 2025</span>
+                        <a href="experience-zbc.html" class="timeline-know-me-btn" style="padding: 6px 14px; font-size: 0.78rem;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Know More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="text-align: center;">
+        <h2 class="fade-in">Let us build something together</h2>
+        <p class="fade-in" style="margin-bottom: 30px;">If you have a project in mind or want to talk engineering, I
+            would like to hear from you.</p>
+        <form id="contact-form" action="https://formsubmit.co/ritturonald.rm@gmail.com" method="POST" class="fade-in" style="max-width: 500px; margin: 0 auto; text-align: left;">
+            <input type="hidden" name="_captcha" value="false">
+            
+            <!-- Routing Protocol Selector -->
+            <div class="form-group">
+                <label style="display: block; font-family: var(--font-head); font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase;">Routing Protocol</label>
+                <div class="routing-protocols">
+                    <button type="button" class="routing-btn active" data-channel="email">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </button>
+                    <button type="button" class="routing-btn" data-channel="whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                    </button>
+                </div>
+                <input type="hidden" name="_routing" id="routing-channel" value="email">
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="contact-name" name="name" placeholder="Incoming Transmission Entity (Name)" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="contact-email" name="email" placeholder="Return Address (Email)" required>
+            </div>
+            <div class="form-group">
+                <textarea id="contact-message" name="message" rows="5" placeholder="Payload (Message)" required></textarea>
+            </div>
+            <button type="submit" id="contact-submit-btn" class="btn" style="width: 100%;">Transmit via Email</button>
+        </form>
+    </section>
+
+    <!-- ======= Full Footer (Inspired by akshetpatel.com) ======= -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-get-in-touch fade-in">
+                <h5 class="footer-title">Get in Touch</h5>
+                <p>In case of any questions, constructive criticism, or just a friendly chat, feel free to contact me
+                    via email and do consider connecting with me on these social platforms.</p>
+                <ul class="footer-info">
+                    <li><i class="fa-solid fa-location-dot"></i> Chennai, India</li>
+                    <li><i class="fa-solid fa-envelope"></i> ritturonald.rm@gmail.com</li>
+                </ul>
+                <div class="footer-socials">
+                    <a href="https://linkedin.com/in/ritturonald" target="_blank"><i
+                            class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://github.com/ritturonald" target="_blank"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- --- Hidden CMS and Modals --- -->
+
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('project-modal')">&times;</span>
+            <h2 id="modal-title">Project Title</h2>
+            <img id="modal-img" src="" alt="Project Image"
+                style="width:100%; height:250px; object-fit:cover; margin-bottom:15px; border:1px solid var(--accent-cyan);">
+            <div id="modal-tags" class="tags"></div>
+            <p id="modal-desc" style="margin-bottom: 20px; white-space: pre-wrap; font-family: var(--font-body);"></p>
+            <a id="modal-link" href="#" target="_blank" class="btn">View Source</a>
+        </div>
+    </div>
+
+    <!-- Headless CMS Drawer (Ctrl + Shift + A) -->
+    <div id="admin-drawer" class="cms-drawer">
+        <h2>System Override // Admin</h2>
+
+        <div id="admin-login-section">
+            <div class="form-group">
+                <label>Access Code</label>
+                <input type="password" id="admin-pass" placeholder="Enter password (try: admin)">
+            </div>
+            <button class="btn" style="width: 100%;" onclick="loginAdmin()">Authenticate</button>
+        </div>
+
+        <div id="admin-panel" style="display: none;">
+            <button class="btn" onclick="exportData()"
+                style="width: 100%; margin-bottom: 20px; font-size: 0.8rem;">Export JSON Backup</button>
+
+            <div class="form-group">
+                <label>Data Type</label>
+                <select id="cms-type">
+                    <option value="projects">Projects</option>
+                    <option value="blog">Blog Posts</option>
+                </select>
+            </div>
+
+            <input type="hidden" id="cms-id">
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="cms-title">
+            </div>
+
+            <div id="cms-project-fields">
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="text" id="cms-image" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Tags (comma separated)</label>
+                    <input type="text" id="cms-tags" placeholder="ROS, Python, CAD">
+                </div>
+                <div class="form-group">
+                    <label>GitHub Link</label>
+                    <input type="text" id="cms-link" placeholder="https://github.com/...">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Description / Content</label>
+                <textarea id="cms-desc" rows="5"></textarea>
+            </div>
+
+            <div class="cms-actions">
+                <button class="btn" onclick="saveItem()">Save</button>
+                <button class="btn" style="border-color: #ff3333; color: #ff3333;" onclick="clearForm()">Clear</button>
+            </div>
+
+            <div class="item-list" id="admin-item-list">
+                <!-- Editable list injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal" onclick="handleLightboxOutsideClick(event)">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content-wrapper">
+            <button class="lightbox-prev" onclick="changeSlide(-1)">&lt;</button>
+            <div class="lightbox-image-container">
+                <img id="lightbox-img" src="" alt="Visual Log Artefact">
+            </div>
+            <button class="lightbox-next" onclick="changeSlide(1)">&gt;</button>
+        </div>
+        <div class="lightbox-caption-container">
+            <div class="lightbox-caption-header">
+                <h3 id="lightbox-title">Artefact Title</h3>
+                <span id="lightbox-counter" class="lightbox-counter">0 / 0</span>
+            </div>
+            <p id="lightbox-desc">Detailed logs from mechatronic systems engineering trajectory.</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

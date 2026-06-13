@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Output // Blog & Notes | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .portfolio-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .portfolio-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        @media screen and (max-width: 768px) {
+            .portfolio-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .portfolio-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#blog" class="active">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="portfolio-container">
+        
+        <a href="index.html#blog" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Hub
+        </a>
+
+        <header class="portfolio-header-block">
+            <h1 class="portfolio-title">Terminal Logs // Blog & Notes</h1>
+            <p class="portfolio-meta-desc">Technical write-ups, programming calibrations, and diagnostics insights on mechatronics engineering.</p>
+        </header>
+
+        <main>
+            <div class="grid" id="all-blog-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
+                <!-- Dynamically loaded by script.js -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Blog Details Modal -->
+    <div id="blog-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('blog-modal')">&times;</span>
+            <p id="blog-modal-date" style="color: var(--accent-cyan); font-family: var(--font-body); font-size: 0.85rem; margin-bottom: 5px;">> Date</p>
+            <h2 id="blog-modal-title" style="margin-bottom: 20px;">Blog Title</h2>
+            <div class="terminal-block" style="margin: 0 0 25px 0; background: #0f172a; border-left: 4px solid var(--accent-amber); padding: 15px;">
+                <p id="blog-modal-content" style="white-space: pre-wrap; font-family: var(--font-body); margin: 0; color: #38bdf8; text-align: justify; line-height: 1.8;"></p>
+            </div>
+            <button class="btn" onclick="closeModal('blog-modal')" style="width: 100%;">Close Terminal Log</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

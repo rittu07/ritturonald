@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rane Madras Internship | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Subpage Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom tables & lists */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .test-facilities-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            min-width: 600px;
+        }
+
+        .test-facilities-table th {
+            background-color: #0f172a;
+            color: #38bdf8;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .test-facilities-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .test-facilities-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .test-facilities-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .test-facilities-table tr:hover {
+            background-color: rgba(0, 122, 204, 0.04);
+        }
+
+        .facility-badge {
+            font-family: var(--font-head);
+            font-weight: 700;
+            color: var(--accent-cyan);
+            background: rgba(0, 122, 204, 0.06);
+            border: 1px solid rgba(0, 122, 204, 0.15);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .reflection-card {
+            background: rgba(212, 136, 6, 0.03);
+            border-left: 4px solid var(--accent-amber);
+            padding: 30px;
+            border-radius: 0 8px 8px 0;
+            margin: 40px 0 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+        }
+
+        .reflection-card h4 {
+            color: var(--accent-amber);
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reflection-text {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 0 !important;
+        }
+
+        /* Detailed Bullet Lists with Custom Counters/Gradients */
+        .detailed-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 25px 0;
+        }
+
+        .detailed-list-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid #e2e8f0;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detailed-list-item:hover {
+            border-left-color: var(--accent-cyan);
+        }
+
+        .detailed-list-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .detailed-list-item:hover::before {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .detailed-list-item-title {
+            color: var(--text-main);
+            font-family: var(--font-head);
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience" class="active">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#experience" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Experiences
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">Finite Element Analysis</span>
+                <span class="project-badge">Mechanical Modeling</span>
+                <span class="project-badge">Heat-Treatment QC</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-industry"></i> Plant Floor Systems</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
+                <img src="photos/rane_transparent.png" alt="Rane Madras Logo" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; padding: 4px; background: #ffffff;">
+                <div>
+                    <h1 class="project-title" style="margin: 0; line-height: 1.1;">Rane Madras Limited</h1>
+                    <p class="project-meta-desc" style="margin-top: 5px; margin-bottom: 0;">Project Intern · Mechatronics & Automation · Aug-Nov 2024</p>
+                </div>
+            </div>
+            <p style="font-size: 0.95rem; color: var(--accent-amber); font-weight: 700; margin-top: 15px; font-family: var(--font-body); border-left: 2px solid var(--accent-amber); padding-left: 15px; line-height: 1.5; font-style: italic;">
+                Most projects start with a blank page. Rane started with a broken machine, missing documentation, and a deadline. That gap between theory and shop floor is where the real engineering lives.
+            </p>
+            <p style="font-size: 0.95rem; color: var(--accent-cyan); font-weight: 700; margin-top: 15px; font-family: var(--font-body); border-left: 2px solid var(--accent-cyan); padding-left: 15px;">
+                Team: Vinod Vasan · Pravarthika V. · Sriker Y.S. · Rittu Ronald
+            </p>
+        </header>
+
+        <img src="rane.jpeg" alt="Rane Madras Team" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <!-- Overview -->
+            <h3 class="project-section-heading" style="margin-top: 0;">Overview</h3>
+            <p>
+                Rane Madras Limited manufactures automotive steering racks at scale. Heat treatment - essential for surface hardness - introduces bends ranging from a few microns to several millimetres along each rack's length. RML's MAE automated bend correction machine was the answer, but years of shop-floor use had left it unreliable. Our team's job was to understand why it was failing, design fixes, and propose what a digitalized next-generation system should look like.
+            </p>
+            <p>
+                The project ran two tracks simultaneously: a brownfield effort to restore and upgrade the existing machine, and a greenfield exploration of better sensing technologies to replace it.
+            </p>
+
+            <!-- The Problem Worth Solving -->
+            <h3 class="project-section-heading">The Problem Worth Solving</h3>
+            <p>
+                Steering racks emerge from induction hardening with unpredictable bends - deviations from the symmetrical axis that current correction systems reduce but cannot consistently eliminate. Every uncorrected micron at the wrong point can fail a customer quality gate. The existing MAE machine had the right architecture but had degraded to the point where its measurements were no longer repeatable.
+            </p>
+
+            <!-- Force Modelling & ANSYS Validation -->
+            <h3 class="project-section-heading">Force Modelling & ANSYS Validation</h3>
+            <p>
+                Beam-deflection formulas were derived from Euler-Bernoulli theory for a simply supported rod under an off-centre point load. Corrective forces were computed and cross-verified in ANSYS Static Structural - confirming the linear force-deflection relationship while revealing where the theoretical model breaks down for larger deflections.
+            </p>
+
+            <!-- Perception System Alternatives -->
+            <h3 class="project-section-heading">Perception System Alternatives</h3>
+            <p>
+                The existing Heidenhain MT12 LVDT setup used a 2.5:1 mechanical lever arrangement - badly corroded and introducing measurement play. Three replacements were designed and evaluated:
+            </p>
+            <ul class="detailed-list">
+                <li class="detailed-list-item">
+                    <span class="detailed-list-item-title">LASER Triangulation</span>
+                    Non-contact single-pass scan of the full rack length; hardware and algorithm both specified.
+                </li>
+                <li class="detailed-list-item">
+                    <span class="detailed-list-item-title">Computer Vision Pipeline</span>
+                    MATLAB/Simulink image processor using Canny edge detection and polynomial regression to locate maximum deviation; tested on simulated bent-rod images.
+                </li>
+                <li class="detailed-list-item">
+                    <span class="detailed-list-item-title">Halo 4-LVDT Array</span>
+                    Four sensors at 90° intervals on a sliding ring, computing a 2D displacement vector (magnitude + direction) at every cross-section without any lever mechanism.
+                </li>
+            </ul>
+
+            <!-- Machine Reconditioning & IoT -->
+            <h3 class="project-section-heading">Machine Reconditioning & IoT</h3>
+            <p>
+                A full mechanical and electrical audit of the MAE machine was conducted. The lever linkage was severely corroded; the conical clamp allowed rod slippage during rotation. A solenoid drop-type positioning system was designed - direct 1:1 LVDT contact with the rack, sensor retracting into a recess during the correction punch to avoid damage.
+            </p>
+            <p>
+                A zero-base master gage rod was also designed for fabrication to give sensor calibration a true reference. For digitalization, an IoT-SCADA framework was proposed to connect the PLC to a cloud database for remote monitoring and cycle-record access.
+            </p>
+
+            <!-- Internship Artifacts & Certification -->
+            <h3 class="project-section-heading">Internship Artifacts & Certification</h3>
+            <p>
+                Official project documentation and training certification from my mechatronics internship at Rane Madras Limited:
+            </p>
+            <div class="tech-spec-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 20px;">
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(0, 122, 204, 0.15); cursor: pointer;" onclick="openArtifactModal('rane.jpeg')">
+                    <img src="rane.jpeg" alt="Rane Project Team" style="width: 100%; height: auto; max-height: 280px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; background: #ffffff; transition: transform 0.3s ease;">
+                </div>
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(212, 136, 6, 0.15); cursor: pointer;" onclick="openArtifactModal('rane certificate.pdf')">
+                    <div style="padding: 30px 10px; color: var(--accent-amber);">
+                        <i class="fa-solid fa-file-pdf" style="font-size: 3.5rem; margin-bottom: 15px;"></i>
+                        <h4 style="font-family: var(--font-head); font-weight: 700; font-size: 0.95rem; text-transform: uppercase; margin-bottom: 8px; color: var(--text-main);">Rane Certificate.pdf</h4>
+                        <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 0;">Click to open PDF Certificate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What I Took Away -->
+            <div class="reflection-card" style="margin-top: 40px;">
+                <h4><i class="fa-solid fa-graduation-cap"></i> What I Took Away</h4>
+                <p class="reflection-text">
+                    Project Rane closed the gap between coursework models and live industrial machines. The ANSYS cross-check showed exactly where theoretical assumptions hold and where they quietly break down.
+                    <br><br>
+                    The machine teardown showed that even state-of-the-art equipment degrades into unreliability without the right maintenance and digitalization scaffolding around it - and that identifying those gaps is as valuable as building the fix.
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Visual Artifacts Pop-up Modal -->
+    <div id="artifact-modal" class="modal" onclick="closeArtifactModal(event)">
+        <div class="modal-content" style="max-width: 800px; width: 90%; padding: 20px; background: #ffffff; position: relative; border-radius: 8px;">
+            <span class="close-btn" onclick="document.getElementById('artifact-modal').style.display='none'" style="color: var(--accent-amber); font-weight: bold; position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; z-index: 10;">&times;</span>
+            <div id="artifact-modal-body" style="margin-top: 15px; width: 100%; height: 70vh; display: flex; justify-content: center; align-items: center;">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openArtifactModal(fileSrc) {
+            const modal = document.getElementById('artifact-modal');
+            const modalBody = document.getElementById('artifact-modal-body');
+            if (fileSrc.toLowerCase().endsWith('.pdf')) {
+                modalBody.innerHTML = `<iframe src="${fileSrc}" style="width: 100%; height: 100%; border: none; border-radius: 4px;"></iframe>`;
+            } else {
+                modalBody.innerHTML = `<img src="${fileSrc}" alt="Artifact Preview" style="width: 100%; height: auto; max-height: 100%; object-fit: contain; border-radius: 4px; border: 1px solid #e2e8f0;">`;
+            }
+            modal.style.display = 'flex';
+        }
+        
+        function closeArtifactModal(event) {
+            const modal = document.getElementById('artifact-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanoidX VITCC | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Subpage Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+            padding: 40px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        .workshop-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .workshop-table th {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e2e8f0;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .workshop-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .workshop-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .workshop-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience" class="active">Experience</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#experience" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Experiences
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">Legged Robotics</span>
+                <span class="project-badge">ROS2 Humble</span>
+                <span class="project-badge">Joint Synchronization</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-robot"></i> Research & Dev Lead</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
+                <img src="Internship/humanoidx.png" alt="HumanoidX Logo" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; padding: 4px; background: #ffffff;">
+                <div>
+                    <h1 class="project-title" style="margin: 0; line-height: 1.1;">HumanoidX VITCC</h1>
+                    <p class="project-meta-desc" style="margin-top: 5px; margin-bottom: 0;">Programming Lead | VIT Chennai | March 2025 - Present</p>
+                </div>
+            </div>
+        </header>
+
+        <img src="Internship/humanoidx.png" alt="HumanoidXVITCC Logo" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <h3 class="project-section-heading" style="margin-top: 0;">Overview</h3>
+            <p>
+                HumanoidX is VIT Chennai's humanoid robotics club - a space where students push beyond coursework into real robotics development. As <strong>Programming Lead</strong>, I wear three hats: I lead the software architecture of what the club builds, I help organize the events that grow the community, and I mentor the juniors who are just finding their footing in robotics. None of those roles exist in isolation - they feed each other constantly.
+            </p>
+
+            <h3 class="project-section-heading">🤖 Working with Software</h3>
+            <p>
+                My technical responsibility is the software backbone of HumanoidX's humanoid robotics projects. That means <strong>working with software</strong> - designing node architectures, managing topic communication, integrating sensors, and building motion control pipelines that actually work on physical hardware.
+            </p>
+            <p>
+                Leading a programming team is a different challenge than programming alone. Technical decisions you make get inherited by everyone else. Bugs you miss get amplified. And the ability to explain a complex system clearly - to a teammate who's stuck at 11pm before a demo - matters just as much as writing clean code.
+            </p>
+
+            <h3 class="project-section-heading">📡 Event 1 - 2-Day ROS2 Workshop</h3>
+            <p>
+                Co-organized and co-hosted a <strong>2-day intensive ROS2 workshop</strong> with two fellow club members - built from scratch for students with zero ROS2 experience.
+            </p>
+            
+            <p style="font-weight: 700; color: var(--text-main); margin-bottom: 5px;">Why We Built It</p>
+            <p>
+                ROS2 is one of the most powerful frameworks in robotics - and one of the most intimidating to start with. Most students give up before writing their first node. We wanted to change that.
+            </p>
+
+            <p style="font-weight: 700; color: var(--text-main); margin-bottom: 5px;">What We Covered</p>
+            <table class="workshop-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Day</th>
+                        <th>Topics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Day 1</strong></td>
+                        <td>ROS2 fundamentals, workspace setup, nodes, topics, publishers & subscribers, basic robot control</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 2</strong></td>
+                        <td>Service-client architecture, launch files, sensor integration, hands-on project on real robot system</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Every session was hands-on from minute one. Students wrote code, ran nodes, debugged real errors, and saw their work control something physical. The moment on Day 2 when things start clicking for people - that's what we designed the whole experience around.
+            </p>
+
+            <h3 class="project-section-heading">🏆 Event 2 - Synthetix</h3>
+            <p>
+                Synthetix was HumanoidX's flagship technical robotics event - a larger-scale competition and showcase bringing together students from across VIT Chennai to compete, build, and demonstrate robotics projects.
+            </p>
+            <p>
+                I was part of the core organizing team - handling event structure, participant coordination, and ensuring the technical standards of the event reflected what the club stands for. Pulling off a two-day event with moving parts, competing teams, and live demos requires a completely different kind of systems thinking - and it's one I've genuinely grown to value.
+            </p>
+
+            <h3 class="project-section-heading">🌱 Mentoring Juniors</h3>
+            <p>
+                One of the parts of this role I'm most proud of is working directly with junior members on their robotics projects. Not just answering questions - but sitting with them through the confusion, helping them break a problem into smaller pieces, and watching them figure things out on their own terms.
+            </p>
+            <p>
+                I've guided juniors through sensor integration, ROS2 setup, basic control systems, and mechanical-software interfacing. Every session reminds me that teaching forces you to understand something at a deeper level than just building it yourself.
+            </p>
+
+            <h3 class="project-section-heading">What This Role Has Taught Me</h3>
+            <p>
+                Programming gets you into the room. Leadership, events, and mentorship are what make the room worth being in. HumanoidX has taught me that the best engineers aren't just technically sharp - they build the people and the culture around them too. The ROS2 workshop, Synthetix, the late-night debugging sessions with juniors - all of it adds up to something I'm genuinely proud of.
+            </p>
+
+            <h3 class="project-section-heading">Locomotion Nodes Calibration Logs</h3>
+            <p>
+                To illustrate the real-time joint feedback loops and kinematic diagnostic checks, the following ROS2 telemetry log has been compiled:
+            </p>
+
+            <div class="terminal-block">
+                [ROS2-HUMANOID-NODE]: Locomotion node initialized. Urdf: humanoid_x.urdf<br>
+                [ROS2-HUMANOID-NODE]: Target footstep: X: 0.15m | Y: 0.0m | Z: -0.08m (Duration: 400ms)<br>
+                [ROS2-HUMANOID-NODE]: Joint angles (rad): H_Pitch: 0.34, K_Pitch: -0.68, A_Pitch: 0.34<br>
+                [ROS2-HUMANOID-NODE]: Trajectory feedback: L_Leg: Tracking error: 0.002 rad (STATUS: STABLE)
+            </div>
+
+            <p style="margin-top: 30px;">
+                By utilizing low-latency communication loops and calibrating mathematical Bezier walking gaits against Gazebo physics models, we demonstrate high-precision joint tracking controls and exceptional physical system stability.
+            </p>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

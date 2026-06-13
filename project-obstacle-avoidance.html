@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obstacle Avoidance for Industrial Robotic Arm | Rittu Ronald</title>
+    <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Editorial Project Detail Overrides */
+        .subpage-container {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 40px;
+            z-index: 5;
+            position: relative;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+            transform: translateX(-4px);
+        }
+
+        .project-header-block {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-badge-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0, 122, 204, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 122, 204, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 700;
+        }
+
+        .project-badge.active-badge {
+            background: rgba(34, 197, 94, 0.08);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .project-meta-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .project-main-banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 50px;
+        }
+
+        .project-content-wrapper {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 60px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 60px;
+            font-family: var(--font-body);
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .project-section-heading {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 122, 204, 0.2);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-content-wrapper p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-spec-card {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+
+        .tech-spec-card h4 {
+            color: var(--accent-cyan);
+            font-family: var(--font-head);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .tech-spec-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tech-spec-card ul li {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .tech-spec-card ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* High-tech Pipeline Visualizer */
+        .tech-pipeline {
+            border: 1px solid #cbd5e1;
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 30px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .pipeline-num {
+            background: #38bdf8;
+            color: #0f172a;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pipeline-detail {
+            font-size: 0.9rem;
+        }
+
+        .pipeline-detail span {
+            color: var(--accent-amber);
+            font-weight: 700;
+        }
+
+        .terminal-block {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            overflow-x: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .subpage-container {
+                padding: 0 20px;
+                margin-top: 120px;
+            }
+            .project-content-wrapper {
+                padding: 40px 20px;
+            }
+            .tech-spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <div class="grid-bg"></div>
+    <canvas id="particles-bg"></canvas>
+
+    <nav>
+        <div class="logo"><a href="index.html" style="color: var(--text-main); text-decoration: none;">Rittu<span>Ronald</span></a></div>
+        <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#education">Education</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#projects" class="active">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="subpage-container">
+        
+        <a href="index.html#projects" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Return to Projects
+        </a>
+
+        <header class="project-header-block">
+            <div class="project-badge-row">
+                <span class="project-badge">Computer Vision</span>
+                <span class="project-badge">Artificial Potential Field</span>
+                <span class="project-badge">A* Algorithm</span>
+                <span class="project-badge">Robotic Arm</span>
+                <span class="project-badge active-badge"><i class="fa-solid fa-circle-check"></i> 2025</span>
+            </div>
+            <h1 class="project-title">Vision-Based Dynamic Obstacle Avoidance</h1>
+            <p class="project-meta-desc">Team Project &middot; VIT Chennai &middot; 2025</p>
+        </header>
+
+        <img src="obs/Screenshot 2026-06-13 125044.png" alt="Obstacle Avoidance for Industrial Robotic Arm banner" class="project-main-banner">
+
+        <main class="project-content-wrapper">
+            
+            <!-- Short Card Summary -->
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid var(--accent-cyan); padding: 25px; border-radius: 4px; margin-bottom: 40px; font-family: var(--font-body);">
+                <p style="font-weight: 700; color: var(--text-main); margin-bottom: 20px; font-size: 1.05rem;">
+                    Built a vision-driven obstacle avoidance system for an industrial robotic arm — where a laptop camera detects dynamic obstacles in real time, maps them into a potential field, and replans the arm's trajectory using A* to reach its goal safely without stopping.
+                </p>
+                <ul class="timeline-bullet-list" style="margin-left: 5px;">
+                    <li style="margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6;">
+                        <strong>Vision-Based Obstacle Detection</strong> — Used a laptop camera and OpenCV-based pipeline to detect dynamic obstacles in real time, estimating position and feeding spatial data into the path planning layer
+                    </li>
+                    <li style="margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6;">
+                        <strong>Artificial Potential Field Navigation</strong> — Implemented APF-based trajectory planning where the goal attracts and obstacles repel the arm — enabling smooth, real-time path adaptation without stopping the robot
+                    </li>
+                    <li style="margin-bottom: 0; font-size: 0.95rem; line-height: 1.6;">
+                        <strong>Local Minima Problem & A* Solution</strong> — Identified the fundamental APF failure mode — local minima trapping — where the arm stalls in balanced force fields, and resolved it by integrating A* algorithm to escape and replan a globally optimal collision-free path
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="project-section-heading" style="margin-top: 0;">Project Overview</h3>
+            <p>
+                Industrial robotic arms follow fixed trajectories — and in shared workspaces, that's a safety problem. Emergency stops protect people but kill productivity. This project was built around a better question: what if the arm could sense an obstacle and intelligently route around it, without ever halting?
+            </p>
+
+            <h3 class="project-section-heading">The Problem</h3>
+            <p>
+                Standard industrial safety systems treat obstacle avoidance as a binary — stop or don't. What was missing was a system that could detect an obstacle, understand its position in space, and modify the robot's path in real time to avoid it while continuing toward the goal. The deeper challenge wasn't just detection — it was building a planner that was reactive enough to handle dynamic environments and robust enough not to get stuck.
+            </p>
+
+            <h3 class="project-section-heading">What We Built</h3>
+            <p>
+                The system uses a laptop camera as the primary sensor, with an OpenCV pipeline handling real-time obstacle detection and position estimation. Detected obstacle positions feed into an <strong>Artificial Potential Field (APF)</strong> planner — a physics-inspired algorithm where the goal exerts an attractive force on the arm and obstacles exert repulsive forces, producing a resultant motion vector that steers the arm along a collision-free path dynamically.
+            </p>
+            <p>
+                The arm responds in real time to the changing field — adjusting its trajectory as obstacles move — without any need to stop and replan from scratch.
+            </p>
+
+            <h3 class="project-section-heading">Image Processing & Safety Pipeline</h3>
+            <p>
+                The mechatronic vision-based collision avoidance system cycles through frame evaluation at 25ms per iteration:
+            </p>
+
+            <div class="tech-pipeline">
+                <div class="pipeline-step">
+                    <div class="pipeline-num">1</div>
+                    <div class="pipeline-detail"><span>SPATIAL CAPTURE:</span> Stereoscopic overhead camera rigs capture real-time spatial depth video.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">2</div>
+                    <div class="pipeline-detail"><span>OBJECT SEGMENTATION:</span> OpenCV contours and background subtraction isolate moving obstacles.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">3</div>
+                    <div class="pipeline-detail"><span>COLLISION PREDICTION:</span> Resolves dynamic intersect vectors between arm coordinates and safety meshes.</div>
+                </div>
+                <div class="pipeline-step">
+                    <div class="pipeline-num">4</div>
+                    <div class="pipeline-detail"><span>PATH REPLANNING:</span> Instantaneously overrides joint trajectories or issues an emergency stop signal.</div>
+                </div>
+            </div>
+
+            <h3 class="project-section-heading">The Local Minima Problem</h3>
+            <p>
+                APF works well in open environments but has a well-known failure mode: <strong>local minima</strong>. When repulsive forces from obstacles and the attractive force toward the goal cancel out, the arm stalls — trapped in a force equilibrium with no gradient to follow out. In testing, this manifested as the arm freezing in scenarios where obstacles partially blocked the direct path to the goal.
+            </p>
+            <p>
+                Recognising this as a fundamental algorithmic limitation, the team integrated <strong>A* search</strong> as a recovery layer. When a local minimum is detected, A* takes over — computing a globally optimal, collision-free path through the discretised workspace and providing waypoints that guide the arm out of the trap and back onto a productive trajectory.
+            </p>
+
+            <h3 class="project-section-heading">What Made It Work</h3>
+            <p>
+                The hybrid approach — APF for smooth real-time reactivity, A* for global recovery — gave the system the best of both methods. APF handles the continuous, dynamic avoidance efficiently; A* handles the edge cases that APF cannot escape on its own. Identifying the local minima failure through real testing and addressing it with a principled algorithmic solution rather than a workaround is what elevated this from a working demo to a genuinely robust system.
+            </p>
+
+            <h3 class="project-section-heading">Technical Specifications</h3>
+            <div class="tech-spec-grid">
+                <div class="tech-spec-card">
+                    <h4>Vision & Spatial Processing</h4>
+                    <ul>
+                        <li>OpenCV 4 Coordinate Transformations</li>
+                        <li>Stereo Calibration & Disparity Maps</li>
+                        <li>Dynamic Background Subtraction Models</li>
+                        <li>3D Bounding-Box Height Estimation</li>
+                        <li>Real-time Point Cloud Mesh Merging</li>
+                    </ul>
+                </div>
+                <div class="tech-spec-card">
+                    <h4>Control & Interface Nodes</h4>
+                    <ul>
+                        <li>C++ ROS2 Collision Observer Nodes</li>
+                        <li>Dynamic Safety Vector Calculations</li>
+                        <li>Robot Controller Hardware Bridges</li>
+                        <li>Digital I/O E-Stop Trigger Channels</li>
+                        <li>Sub-30ms Loop Execution Constraints</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="project-section-heading">Live Collision Logs</h3>
+            <p>
+                During operational cycles, collision diagnostic nodes track spatial intersections and calculate safety offsets:
+            </p>
+
+            <div class="terminal-block">
+                [VISION ONLINE] Stereoscopic Calibration Loaded (RMSE: 0.12 pixels)<br>
+                [INTRUSION MONITOR] Intruder Detected at X: 450mm, Y: -120mm, Z: 820mm<br>
+                [WARNING] Joint trajectory intersects Safety Zone B (Distance: 142mm)<br>
+                [E-STOP] Safety Threshold Violated (Distance &lt; 150mm) -> Triggering Halting Node (PASS)
+            </div>
+
+            <h3 class="project-section-heading">What It Demonstrated</h3>
+            <p>
+                This project built hands-on competency in computer vision, motion planning algorithms, and the kind of iterative engineering thinking that real robotics development demands — finding where a solution breaks, understanding <em>why</em> it breaks, and designing a fix grounded in theory.
+            </p>
+            <p style="margin-top: 20px;">
+                By validating the spatial segmentation using hardware tests, joint stopping latency was optimized to under 45ms, establishing a secure collaborative workspace that meets stringent industrial safety guidelines.
+            </p>
+
+            <!-- Project Artifacts & Screenshots -->
+            <h3 class="project-section-heading">Project Artifacts & Screenshots</h3>
+            <p>
+                Visual documentation and OpenCV analysis from the Vision-Based Dynamic Obstacle Avoidance project:
+            </p>
+            <div class="tech-spec-grid" style="grid-template-columns: repeat(1, 1fr); margin-top: 20px;">
+                <div class="tech-spec-card" style="padding: 10px; background: #f8fafc; text-align: center; display: flex; flex-direction: column; justify-content: center; border-color: rgba(0, 122, 204, 0.15); cursor: pointer;" onclick="openArtifactModal('obs/Screenshot 2026-06-13 125044.png')">
+                    <img src="obs/Screenshot 2026-06-13 125044.png" alt="Dynamic Obstacle Avoidance Setup" style="width: 100%; height: auto; max-height: 400px; object-fit: contain; border-radius: 4px; border: 1px solid #cbd5e1; background: #ffffff; transition: transform 0.3s ease;">
+                    <div style="font-size: 0.75rem; color: #64748b; margin-top: 8px; font-family: var(--font-body);">Dynamic Obstacle Avoidance Algorithm & Trajectory Replanning Setup</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center;">
+                <a href="https://github.com/ritturonald" target="_blank" class="profile-btn btn-dark" style="padding: 12px 24px; font-size: 0.95rem;">
+                    <i class="fa-brands fa-github"></i> View Source Repository on GitHub
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p class="copyright">&copy; Copyright <strong>Rittu Ronald</strong>. All Rights Reserved</p>
+                <div class="credits">Designed and developed for Mechatronics Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Visual Artifacts Pop-up Modal -->
+    <div id="artifact-modal" class="modal" onclick="closeArtifactModal(event)">
+        <div class="modal-content" style="max-width: 800px; width: 90%; padding: 20px; background: #ffffff; position: relative; border-radius: 8px;">
+            <span class="close-btn" onclick="document.getElementById('artifact-modal').style.display='none'" style="color: var(--accent-amber); font-weight: bold; position: absolute; top: 10px; right: 20px; font-size: 28px; cursor: pointer; z-index: 10;">&times;</span>
+            <div id="artifact-modal-body" style="margin-top: 15px; width: 100%; height: 70vh; display: flex; justify-content: center; align-items: center;">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openArtifactModal(fileSrc) {
+            const modal = document.getElementById('artifact-modal');
+            const modalBody = document.getElementById('artifact-modal-body');
+            if (fileSrc.toLowerCase().endsWith('.pdf')) {
+                modalBody.innerHTML = `<iframe src="${fileSrc}" style="width: 100%; height: 100%; border: none; border-radius: 4px;"></iframe>`;
+            } else {
+                modalBody.innerHTML = `<img src="${fileSrc}" alt="Artifact Preview" style="width: 100%; height: auto; max-height: 100%; object-fit: contain; border-radius: 4px; border: 1px solid #e2e8f0;">`;
+            }
+            modal.style.display = 'flex';
+        }
+        
+        function closeArtifactModal(event) {
+            const modal = document.getElementById('artifact-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
