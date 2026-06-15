@@ -236,6 +236,21 @@ const defaultProjects = [
     { id: '10', title: 'Battle Bot - Technoxian 2024', desc: 'Designed, built, and competed with a combat robot at one of India\'s biggest international robotics competitions - Technoxian 2024 in Delhi - ranking in the top 15 globally on a minimal budget and executing rapid repairs under high-pressure conditions.\n\n> Combat Robot Design - Engineered a robust mechanical chassis and active weapon system capable of withstanding high impact forces\n> High-Pressure Systems Recovery - Recovered and recalibrated damaged weapon and mobility systems during tight turnaround windows in competition\n> Global Top 15 Ranking - Competed against international teams on a minimal budget, demonstrating high efficiency and resourcefulness', image: 'Internship/movis.png', tags: ['Robotics', 'Combat Robotics', 'Mechanical Design', 'Systems Engineering', 'Technoxian 2024'], link: 'https://github.com/ritturonald' }
 ];
 
+const defaultBlog = [
+    {
+        id: '1',
+        title: 'Building the MIMEX Helrit_bot v2.5 — A Deep Dive',
+        date: '2026-05-29',
+        content: 'A comprehensive deep dive into the open-source robotic ecosystem bringing real-time teleoperation, 3D simulation, and Vision-Language-Action dataset collection to hobbyists, students, and researchers — all for the cost of a microcontroller.\n\nThis guide covers every layer — the communication backbone, the hardware physics, the mathematical engines that translate angles to positions, the noise suppression strategies that prevent motor chatter, the recording and AI export pipeline, the built-in scripting language, and the multi-layer safety framework. We also include a full specification table, a competitive comparison, a development roadmap, and a complete glossary of terms.'
+    },
+    {
+        id: '2',
+        title: 'Autonomous Navigation: Path Planning & SLAM in ROS 2',
+        date: '2025-10-15',
+        content: 'How to configure a complete autonomous mobile robot navigation pipeline using ROS 2 Navigation Stack (Nav2). This post discusses integrating LiDAR scan overlays, IMU state estimation, and costmap-based dynamic obstacle avoidance in dynamic simulation scenarios.\n\nWe analyze the mathematics behind path planning, coordinate system transformations (TF), and sensor fusion filtering (Robot Localization) to ensure high-fidelity positioning under noisy measurement inputs.'
+    }
+];
+
 function getProjects() {
     const data = localStorage.getItem('portfolio_projects');
     return data ? JSON.parse(data) : defaultProjects;
@@ -365,160 +380,7 @@ window.onclick = function(event) {
     }
 }
 
-// --- CMS ADMIN PANEL ---
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
-        e.preventDefault();
-        const drawer = document.getElementById('admin-drawer');
-        if (drawer) {
-            drawer.classList.toggle('open');
-            if (drawer.classList.contains('open') && typeof synth !== 'undefined') {
-                synth.playSweep();
-            }
-        }
-    }
-});
 
-function loginAdmin() {
-    const pass = document.getElementById('admin-pass').value;
-    if (pass === 'admin') { 
-        document.getElementById('admin-login-section').style.display = 'none';
-        document.getElementById('admin-panel').style.display = 'block';
-        renderAdminList();
-    } else {
-        alert('Access Denied');
-    }
-}
-
-const cmsTypeSelector = document.getElementById('cms-type');
-if (cmsTypeSelector) {
-    cmsTypeSelector.addEventListener('change', (e) => {
-        if (e.target.value === 'projects') {
-            document.getElementById('cms-project-fields').style.display = 'block';
-        } else {
-            document.getElementById('cms-project-fields').style.display = 'none';
-        }
-        clearForm();
-        renderAdminList();
-    });
-}
-
-function clearForm() {
-    document.getElementById('cms-id').value = '';
-    document.getElementById('cms-title').value = '';
-    document.getElementById('cms-image').value = '';
-    document.getElementById('cms-tags').value = '';
-    document.getElementById('cms-link').value = '';
-    document.getElementById('cms-desc').value = '';
-}
-
-function saveItem() {
-    const type = document.getElementById('cms-type').value;
-    const id = document.getElementById('cms-id').value || Date.now().toString();
-    const title = document.getElementById('cms-title').value;
-    const desc = document.getElementById('cms-desc').value;
-    
-    if(!title || !desc) {
-        alert('Title and Description are required.');
-        return;
-    }
-
-    if (type === 'projects') {
-        const image = document.getElementById('cms-image').value;
-        const link = document.getElementById('cms-link').value;
-        const tagsStr = document.getElementById('cms-tags').value;
-        const tags = tagsStr.split(',').map(t => t.trim()).filter(t => t);
-        
-        const projects = getProjects();
-        const index = projects.findIndex(p => p.id === id);
-        const newItem = { id, title, desc, image, tags, link };
-        
-        if (index >= 0) projects[index] = newItem;
-        else projects.push(newItem);
-        
-        localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-        renderProjects();
-    } else {
-        const blog = getBlog();
-        const index = blog.findIndex(b => b.id === id);
-        const date = new Date().toISOString().split('T')[0];
-        const newItem = { id, title, content: desc, date: index>=0 ? blog[index].date : date };
-        
-        if (index >= 0) blog[index] = newItem;
-        else blog.push(newItem);
-        
-        localStorage.setItem('portfolio_blog', JSON.stringify(blog));
-        renderBlog();
-    }
-    
-    clearForm();
-    renderAdminList();
-}
-
-function renderAdminList() {
-    const type = document.getElementById('cms-type').value;
-    const list = document.getElementById('admin-item-list');
-    list.innerHTML = '';
-    
-    const items = type === 'projects' ? getProjects() : getBlog();
-    
-    items.forEach(item => {
-        list.innerHTML += `
-            <div class="cms-item">
-                <span style="color:var(--text-main); font-size:0.9rem;">${item.title.substring(0,25)}</span>
-                <div>
-                    <button onclick="editItem('${item.id}')">Edit</button>
-                    <button onclick="deleteItem('${item.id}')" style="color:#ff3333; border-color:#ff3333;">Del</button>
-                </div>
-            </div>
-        `;
-    });
-}
-
-function editItem(id) {
-    const type = document.getElementById('cms-type').value;
-    const items = type === 'projects' ? getProjects() : getBlog();
-    const item = items.find(i => i.id === id);
-    
-    if(item) {
-        document.getElementById('cms-id').value = item.id;
-        document.getElementById('cms-title').value = item.title;
-        if(type === 'projects') {
-            document.getElementById('cms-image').value = item.image || '';
-            document.getElementById('cms-tags').value = (item.tags || []).join(', ');
-            document.getElementById('cms-link').value = item.link || '';
-            document.getElementById('cms-desc').value = item.desc;
-        } else {
-            document.getElementById('cms-desc').value = item.content;
-        }
-    }
-}
-
-function deleteItem(id) {
-    if(!confirm('Are you sure you want to delete this module?')) return;
-    const type = document.getElementById('cms-type').value;
-    if(type === 'projects') {
-        const items = getProjects().filter(i => i.id !== id);
-        localStorage.setItem('portfolio_projects', JSON.stringify(items));
-        renderProjects();
-    } else {
-        const items = getBlog().filter(i => i.id !== id);
-        localStorage.setItem('portfolio_blog', JSON.stringify(items));
-        renderBlog();
-    }
-    renderAdminList();
-}
-
-function exportData() {
-    const data = { projects: getProjects(), blog: getBlog() };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'portfolio_cms_backup.json';
-    a.click();
-    URL.revokeObjectURL(url);
-}
 
 // --- PARTICLES BACKGROUND (GOOGLE ANTIGRAVITY INTERACTIVE CANVAS VORTEX) ---
 const canvas = document.getElementById('particles-bg');
@@ -2177,7 +2039,7 @@ function initAudioTriggers() {
 // Initialize Start
 document.addEventListener('DOMContentLoaded', () => {
     renderProjects(3);
-    // renderBlog(2);
+    renderBlog(2);
     initCustomCursor();
     initHeroScrollReveal();
     initSmartNav();
