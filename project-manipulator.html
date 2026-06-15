@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIMEX Helrit_bot v2.5 | Rittu Ronald</title>
+    <meta name="description" content="MIMEX Helrit_bot leader-follower robotic system with digital twin and WebSocket teleoperation.">
     <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +23,7 @@
             --blog-border: #cbd5e1;
             --blog-border2: #e2e8f0;
             --blog-accent: #059669;
-            --blog-accent2: #007acc;
+            --blog-accent2: #1e40af;
             --blog-accent3: #ea580c;
             --blog-accent4: #ca8a04;
             --blog-text: #334155;
@@ -36,13 +37,13 @@
 
         /* Light Theme Page Overrides */
         body {
-            background-color: #fcfcfc !important;
+            background-color: #f4f6f9 !important;
             color: #2d2d2d !important;
         }
 
         .grid-bg {
-            background-color: #f1f5f9 !important;
-            background-image: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%) !important;
+            background-color: #f4f6f9 !important;
+            background-image: radial-gradient(circle at center, #eff6ff 0%, #f4f6f9 100%) !important;
         }
 
         nav {
@@ -922,9 +923,20 @@
             <li><a href="index.html#education">Education</a></li>
             <li><a href="index.html#experience">Experience</a></li>
             <li><a href="index.html#projects" class="active">Projects</a></li>
-            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#clubs">Clubs</a></li>
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
+        <div class="nav-controls">
+            <!-- Audio Toggle (Default Muted) -->
+            <button id="audio-toggle" class="control-btn" title="Toggle Sci-Fi Audio Systems" aria-label="Toggle Audio">
+                <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-nav-toggle" class="control-btn mobile-nav-btn" title="Toggle Menu" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
     </nav>
 
     <div class="subpage-container">
@@ -1710,7 +1722,6 @@ cos(θ_elbow) = (r² + Y² - L1² - L2²) / (2 · L1 · L2)
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 
     <!-- Visual Artifacts Pop-up Modal -->

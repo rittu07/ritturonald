@@ -1,11 +1,14 @@
-/* CSS Variables for Industrial-Brutalist Theme */
 :root {
-    --bg-dark: #fcfcfc;
+    --bg-dark: #dae2ee;
     --accent-amber: #d48806;
-    --accent-cyan: #007acc;
+    --accent-cyan: #1e40af;
     --text-main: #2d2d2d;
     --font-head: 'Orbitron', sans-serif;
     --font-body: 'JetBrains Mono', monospace;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 * {
@@ -40,12 +43,51 @@ body.page-transitioning {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #f1f5f9;
-    background-image: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%);
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at center, rgba(239, 246, 255, 0.8) 0%, var(--bg-dark) 100%),
+        linear-gradient(rgba(30, 64, 175, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 64, 175, 0.035) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
     z-index: -2;
+    overflow: hidden;
+}
+
+/* Scanner line sweep effect */
+.grid-bg::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 136, 6, 0.1), var(--accent-amber), rgba(212, 136, 6, 0.1), transparent);
+    box-shadow: 0 0 8px var(--accent-amber), 0 0 15px rgba(212, 136, 6, 0.2);
+    opacity: 0.35;
+    animation: scanner-sweep 15s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanner-sweep {
+    0% {
+        top: -5px;
+    }
+    100% {
+        top: 105%;
+    }
 }
 
 #particles-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#body-particles-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -169,6 +211,35 @@ nav ul li a {
 section {
     padding: 100px 10%;
     min-height: 100vh;
+    position: relative;
+}
+
+/* Decorative Background SVGs */
+.decorative-schematic {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.05;
+    color: var(--accent-cyan);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.2;
+    transition: all 0.3s ease;
+}
+.decorative-schematic.amber {
+    color: var(--accent-amber);
+    opacity: 0.04;
+}
+.decorative-schematic text {
+    fill: currentColor;
+    stroke: none;
+}
+
+/* Hide on mobile/tablet viewports to keep text clear */
+@media screen and (max-width: 1024px) {
+    .decorative-schematic {
+        display: none !important;
+    }
 }
 
 /* --- Hero Section --- */
@@ -212,8 +283,9 @@ section {
 }
 
 .typewriter-container {
-    font-size: 2.2rem;
-    color: #666;
+    font-size: 2.5rem;
+    color: #1e293b;
+    font-weight: 700;
     margin-bottom: 40px;
     min-height: 110px;
     font-family: var(--font-body);
@@ -294,10 +366,10 @@ section {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr; /* Name on Left (Column 1), Robot on Right (Column 2) */
     grid-template-rows: auto 1fr;
-    width: 85%;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
     height: 75%;
-    padding: 80px 40px 0;
+    padding: 80px 10% 0; /* Align left and right padding to 10% (matching sections) */
     text-align: left;
     align-items: end;
     gap: 40px;
@@ -356,6 +428,8 @@ section {
 
 .wave-emoji {
     display: inline-block;
+    font-size: 0.55em;
+    vertical-align: middle;
     animation: wave-shake 2.5s infinite;
     transform-origin: 70% 70%;
 }
@@ -383,8 +457,9 @@ section {
 }
 
 .typewriter-base {
-    color: #555555;
-    font-size: 2.2rem;
+    color: #1e293b;
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-top: 30px;
     font-family: var(--font-body);
     white-space: pre-wrap;
@@ -754,7 +829,7 @@ section {
 
 /* --- About Section (Premium Solid Transition Panel) --- */
 #about {
-    background: linear-gradient(to bottom, #080d14 0%, #080d14 120px, #fcfcfc 120px, #fcfcfc 100%);
+    background: linear-gradient(to bottom, #080d14 0%, #080d14 120px, var(--bg-dark) 120px, var(--bg-dark) 100%);
     position: relative;
     z-index: 5;
     padding: 120px 10% 100px;
@@ -764,13 +839,14 @@ section {
 .about-profile-card {
     display: flex;
     gap: 40px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 64, 175, 0.12);
     border-radius: 8px;
     padding: 40px;
     margin-top: 60px; /* Elegant 60px distance below the black hero transition panel */
     margin-bottom: 60px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.04);
 }
 
 .profile-left {
@@ -1108,14 +1184,15 @@ section {
 
 /* --- Education Section --- */
 .education-card {
-    background: #ffffff;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(12px);
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.04);
     max-width: 600px;
     margin: 40px auto;
     overflow: hidden;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(30, 64, 175, 0.12);
     font-family: var(--font-body);
 }
 
@@ -1150,7 +1227,7 @@ section {
 }
 
 .edu-title {
-    color: #007acc;
+    color: var(--accent-cyan);
     font-size: 1.6rem;
     margin-bottom: 5px;
     text-transform: none;
@@ -1185,7 +1262,7 @@ section {
 }
 
 .edu-focus h4 {
-    color: #007acc;
+    color: var(--accent-cyan);
     font-size: 1.1rem;
     margin-bottom: 10px;
     text-transform: none;
@@ -1209,11 +1286,12 @@ section {
 }
 
 .card {
-    background: #ffffff;
-    border: 1px solid #ddd;
-    padding: 20px;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 64, 175, 0.12);
+    padding: 25px 20px 20px;
     position: relative;
-    transition: transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -1221,8 +1299,62 @@ section {
 
 .card:hover {
     transform: translateY(-5px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.08);
+}
+
+/* Technical Corner Brackets */
+.corner-tick {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-color: var(--accent-cyan);
+    border-style: solid;
+    pointer-events: none;
+    opacity: 0.3;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+}
+.card:hover .corner-tick, .timeline-card:hover .corner-tick {
+    opacity: 0.95;
     border-color: var(--accent-amber);
-    box-shadow: 0 5px 15px rgba(245, 166, 35, 0.2);
+}
+.corner-tick.top-left {
+    top: 6px;
+    left: 6px;
+    border-width: 1.5px 0 0 1.5px;
+}
+.corner-tick.top-right {
+    top: 6px;
+    right: 6px;
+    border-width: 1.5px 1.5px 0 0;
+}
+.corner-tick.bottom-left {
+    bottom: 6px;
+    left: 6px;
+    border-width: 0 0 1.5px 1.5px;
+}
+.corner-tick.bottom-right {
+    bottom: 6px;
+    right: 6px;
+    border-width: 0 1.5px 1.5px 0;
+}
+
+/* Card tech identifier status label */
+.card-tech-id {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    color: var(--accent-cyan);
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.65;
+    transition: all 0.3s ease;
+}
+.card:hover .card-tech-id {
+    color: var(--accent-amber);
+    opacity: 1;
 }
 
 .card-link:hover .project-know-more {
@@ -1311,7 +1443,7 @@ section {
 .exp-line {
     width: 50px;
     height: 3px;
-    background-color: #007acc;
+    background-color: var(--accent-cyan);
     margin: 0 auto;
     margin-bottom: 50px;
 }
@@ -1352,16 +1484,16 @@ section {
 
 /* 1. Ashok Leyland (Vibrant Blue Theme) */
 .logo-btn.btn-ashok {
-    border-color: rgba(0, 122, 204, 0.25);
-    box-shadow: 0 4px 10px rgba(0, 122, 204, 0.03);
+    border-color: rgba(30, 64, 175, 0.25);
+    box-shadow: 0 4px 10px rgba(30, 64, 175, 0.03);
 }
 .logo-btn.btn-ashok:hover, .logo-btn.btn-ashok.active {
-    border-color: #007acc;
+    border-color: var(--accent-cyan);
     transform: translateY(-5px);
-    box-shadow: 0 10px 22px rgba(0, 122, 204, 0.15);
+    box-shadow: 0 10px 22px rgba(30, 64, 175, 0.15);
 }
 .logo-btn.btn-ashok img {
-    filter: drop-shadow(0 2px 4px rgba(0, 122, 204, 0.1));
+    filter: drop-shadow(0 2px 4px rgba(30, 64, 175, 0.1));
 }
 
 /* 2. IIT Madras (Premium Gold & Ochre Theme) */
@@ -1523,7 +1655,7 @@ section {
 
 /* 1. Ashok Leyland Node */
 #exp-ashok .timeline-node {
-    border-color: #007acc;
+    border-color: var(--accent-cyan);
 }
 #exp-ashok .timeline-node img {
     filter: none;
@@ -1615,22 +1747,24 @@ section {
 }
 
 .timeline-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 64, 175, 0.12);
     border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.04);
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
 }
 
 .timeline-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent-cyan);
-    box-shadow: 0 15px 35px rgba(0, 122, 204, 0.08);
+    box-shadow: 0 15px 35px rgba(30, 64, 175, 0.08);
 }
 
 .timeline-card-header {
-    background: #f8fafc;
+    background: #ebf4fc;
     padding: 20px 25px;
     border-bottom: 1px solid #e2e8f0;
 }
@@ -1977,7 +2111,7 @@ section {
     
     /* Adjust About Section to start cleanly at the top of the mobile screen */
     #about {
-        background: #fcfcfc !important;
+        background: var(--bg-dark) !important;
         padding: 80px 20px 60px !important;
     }
     
@@ -2117,7 +2251,7 @@ section {
 /* --- GALLERY SECTION --- */
 #gallery {
     padding: 100px 10%;
-    background-color: #f8fafc;
+    background-color: transparent;
 }
 
 .gallery-header {
@@ -2558,11 +2692,12 @@ nav ul li a:hover::after, nav ul li a.active::after {
 /* --- Interactive Skills Section --- */
 .skills-section-wrapper {
     margin-top: 60px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 64, 175, 0.12);
     border-radius: 8px;
     padding: 40px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.04);
 }
 
 .skills-section-wrapper h3 {
@@ -2624,7 +2759,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .skill-item-card {
-    background: #f8fafc;
+    background: #ebf4fc;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     padding: 20px;
@@ -2741,7 +2876,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 
 /* --- Active Clubs Section Styles --- */
 .clubs-section {
-    background: #f8fafc;
+    background: transparent;
     padding: 100px 0;
     border-top: 1px solid #e2e8f0;
     border-bottom: 1px solid #e2e8f0;
@@ -2774,11 +2909,12 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .club-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(30, 64, 175, 0.12);
     border-radius: 8px;
     padding: 40px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 10px 25px rgba(30, 64, 175, 0.04);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

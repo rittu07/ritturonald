@@ -282,6 +282,11 @@ function renderProjects(limit) {
         targetGrid.innerHTML += `
             <a href="${dest}" class="card-link" style="text-decoration: none; color: inherit; display: block;">
                 <div class="card">
+                    <span class="corner-tick top-left"></span>
+                    <span class="corner-tick top-right"></span>
+                    <span class="corner-tick bottom-left"></span>
+                    <span class="corner-tick bottom-right"></span>
+                    <div class="card-tech-id">[ MODULE // 0x0${p.id} ]</div>
                     <img src="${p.image || 'https://via.placeholder.com/400x200/111/333'}" alt="${p.title}">
                     <h3>${p.title}</h3>
                     <div class="tags">${tagsHtml}</div>
@@ -515,35 +520,88 @@ function exportData() {
     URL.revokeObjectURL(url);
 }
 
-// --- PARTICLES BACKGROUND ---
+// --- PARTICLES BACKGROUND (GOOGLE ANTIGRAVITY INTERACTIVE CANVAS VORTEX) ---
 const canvas = document.getElementById('particles-bg');
 if (canvas) {
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    
+    // Set initial size
+    resizeCanvas();
 
     const particlesArray = [];
-    const colors = ['#007acc', '#d48806', '#cccccc', '#005b9f', '#f5a623'];
+    // High-contrast tech-themed colors designed for a clean white background
+    const colors = [
+        '#1e40af',  // Tech Navy
+        '#d48806',  // Amber/orange
+        '#475569',  // Dark slate gray
+        '#2563eb',  // Tech Blue
+        '#64748b'   // Slate gray
+    ];
+
+    // Mouse interactive coordinates
+    let mouse = {
+        x: null,
+        y: null,
+        radius: 140 // Magnetic field radius
+    };
+
+    // Parallax cluster sways
+    let currentOffsetX = 0;
+    let currentOffsetY = 0;
 
     class Particle {
         constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2.5 + 0.5;
-            this.speedY = (Math.random() * -0.5) - 0.1;
-            this.speedX = Math.random() * 0.4 - 0.2;
+            this.reset();
+            // Stagger initial x/y coordinates to prevent spawning animation pop-in
+            this.x = canvas.width / 2 + Math.cos(this.angle) * this.radius;
+            this.y = canvas.height / 2 + Math.sin(this.angle) * this.radius;
+        }
+
+        reset() {
+            this.angle = Math.random() * Math.PI * 2;
+            // Radius from center, distributed to form a vortex ring / disc structure
+            const maxRadius = Math.min(canvas.width, canvas.height) * 0.45;
+            this.radius = Math.random() * maxRadius + 30;
+            // Orbital rotation speed around the vortex center
+            this.spinSpeed = (Math.random() * 0.0012 + 0.0003) * (Math.random() > 0.5 ? 1 : -1);
+            this.size = Math.random() * 1.5 + 0.6; // Tiny tech dots
             this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.shape = Math.random() > 0.5 ? 'circle' : 'square';
-            this.opacity = Math.random() * 0.5 + 0.1;
+            this.shape = Math.random() > 0.65 ? 'square' : 'circle';
+            this.opacity = Math.random() * 0.25 + 0.15;
         }
+
         update() {
-            this.y += this.speedY;
-            this.x += this.speedX;
-            if (this.y < 0) {
-                this.y = canvas.height;
-                this.x = Math.random() * canvas.width;
+            this.angle += this.spinSpeed;
+
+            // Target base vortex coordinates including global parallax sways
+            let baseX = canvas.width / 2 + Math.cos(this.angle) * this.radius + currentOffsetX;
+            let baseY = canvas.height / 2 + Math.sin(this.angle) * this.radius + currentOffsetY;
+
+            let targetX = baseX;
+            let targetY = baseY;
+
+            // Anti-gravity magnetic displacement physics force when mouse hover triggers
+            if (mouse.x !== null && mouse.y !== null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    // Displace away (repel) from cursor to give a dynamic antigravity swarm effect
+                    let forceX = (dx / distance) * force * 55;
+                    let forceY = (dy / distance) * force * 55;
+
+                    targetX = baseX - forceX;
+                    targetY = baseY - forceY;
+                }
             }
+
+            // Smooth LERP physics interpolation
+            this.x += (targetX - this.x) * 0.075;
+            this.y += (targetY - this.y) * 0.075;
         }
+
         draw() {
             ctx.globalAlpha = this.opacity;
             ctx.fillStyle = this.color;
@@ -552,19 +610,36 @@ if (canvas) {
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             } else {
-                ctx.fillRect(this.x, this.y, this.size * 1.5, this.size * 1.5);
+                ctx.fillRect(this.x - this.size, this.y - this.size, this.size * 2, this.size * 2);
             }
         }
     }
 
     function initParticles() {
-        for (let i = 0; i < 80; i++) {
+        particlesArray.length = 0;
+        const particleCount = Math.min(180, Math.floor((canvas.width * canvas.height) / 6000));
+        for (let i = 0; i < particleCount; i++) {
             particlesArray.push(new Particle());
         }
     }
 
     function animateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Smoothly update parallax offsets (circular cluster tilts in opposite direction of mouse)
+        let targetOffsetX = 0;
+        let targetOffsetY = 0;
+
+        if (mouse.x !== null && mouse.y !== null) {
+            let relX = (mouse.x - canvas.width / 2) / (canvas.width / 2);
+            let relY = (mouse.y - canvas.height / 2) / (canvas.height / 2);
+            targetOffsetX = -relX * 35; // Sway up to 35px in opposite direction
+            targetOffsetY = -relY * 35;
+        }
+
+        currentOffsetX += (targetOffsetX - currentOffsetX) * 0.05;
+        currentOffsetY += (targetOffsetY - currentOffsetY) * 0.05;
+
         for (let i = 0; i < particlesArray.length; i++) {
             particlesArray[i].update();
             particlesArray[i].draw();
@@ -572,12 +647,121 @@ if (canvas) {
         requestAnimationFrame(animateParticles);
     }
 
-    initParticles();
-    animateParticles();
-
-    window.addEventListener('resize', () => {
+    function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+    }
+
+    // Interactive pointermove and mouseenter/leave events
+    window.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+
+    window.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles();
+    });
+
+    // Initialize and run
+    initParticles();
+    animateParticles();
+}
+
+// --- BODY PARTICLES BACKGROUND (Floating dots for sections below) ---
+const bodyCanvas = document.getElementById('body-particles-bg');
+if (bodyCanvas) {
+    const bCtx = bodyCanvas.getContext('2d');
+    bodyCanvas.width = window.innerWidth;
+    bodyCanvas.height = window.innerHeight;
+
+    const bodyParticlesArray = [];
+    const colors = ['#1e40af', '#d48806', '#64748b', '#2563eb', '#f5a623'];
+
+    class BodyParticle {
+        constructor() {
+            this.x = Math.random() * bodyCanvas.width;
+            this.y = Math.random() * bodyCanvas.height;
+            this.size = Math.random() * 3 + 1.2;
+            this.speedY = (Math.random() * -0.5) - 0.15; // Float upwards slowly
+            this.speedX = Math.random() * 0.6 - 0.3;
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+            this.shape = Math.random() > 0.55 ? 'circle' : 'square';
+            this.opacity = Math.random() * 0.35 + 0.25;
+        }
+        update() {
+            this.y += this.speedY;
+            this.x += this.speedX;
+            // Loop around when moving off screen
+            if (this.y < 0) {
+                this.y = bodyCanvas.height;
+                this.x = Math.random() * bodyCanvas.width;
+            }
+            if (this.x < 0) this.x = bodyCanvas.width;
+            if (this.x > bodyCanvas.width) this.x = 0;
+        }
+        draw() {
+            bCtx.globalAlpha = this.opacity;
+            bCtx.fillStyle = this.color;
+            bCtx.beginPath();
+            if (this.shape === 'circle') {
+                bCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                bCtx.fill();
+            } else {
+                bCtx.fillRect(this.x - this.size, this.y - this.size, this.size * 2, this.size * 2);
+            }
+        }
+    }
+
+    function initBodyParticles() {
+        bodyParticlesArray.length = 0;
+        const count = Math.min(100, Math.floor((bodyCanvas.width * bodyCanvas.height) / 18000));
+        for (let i = 0; i < count; i++) {
+            bodyParticlesArray.push(new BodyParticle());
+        }
+    }
+
+    function animateBodyParticles() {
+        bCtx.clearRect(0, 0, bodyCanvas.width, bodyCanvas.height);
+        
+        // Draw constellation lines connecting nearby particles
+        for (let a = 0; a < bodyParticlesArray.length; a++) {
+            for (let b = a + 1; b < bodyParticlesArray.length; b++) {
+                let dx = bodyParticlesArray[a].x - bodyParticlesArray[b].x;
+                let dy = bodyParticlesArray[a].y - bodyParticlesArray[b].y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 110) {
+                    let alpha = (1 - (distance / 110)) * 0.15;
+                    bCtx.strokeStyle = `rgba(30, 64, 175, ${alpha})`;
+                    bCtx.lineWidth = 0.8;
+                    bCtx.beginPath();
+                    bCtx.moveTo(bodyParticlesArray[a].x, bodyParticlesArray[a].y);
+                    bCtx.lineTo(bodyParticlesArray[b].x, bodyParticlesArray[b].y);
+                    bCtx.stroke();
+                }
+            }
+        }
+
+        for (let i = 0; i < bodyParticlesArray.length; i++) {
+            bodyParticlesArray[i].update();
+            bodyParticlesArray[i].draw();
+        }
+        requestAnimationFrame(animateBodyParticles);
+    }
+
+    initBodyParticles();
+    animateBodyParticles();
+
+    window.addEventListener('resize', () => {
+        bodyCanvas.width = window.innerWidth;
+        bodyCanvas.height = window.innerHeight;
+        initBodyParticles();
     });
 }
 
@@ -1207,7 +1391,7 @@ function init3DRobotArm() {
 
     // Dynamic LED Indicators on forearm plate
     const forearmLEDs = [];
-    const ledBlue = new THREE.MeshBasicMaterial({ color: 0x007acc });
+    const ledBlue = new THREE.MeshBasicMaterial({ color: 0x1e40af });
     const ledAmber = new THREE.MeshBasicMaterial({ color: 0xd48806 });
     for (let i = 0; i < 3; i++) {
         const ledMat = i === 0 ? ledGreen : i === 1 ? ledAmber : ledBlue;
@@ -1391,7 +1575,7 @@ function init3DRobotArm() {
     scene.add(spotLight);
 
     // Secondary fill light for chrome highlights
-    const fillLight = new THREE.DirectionalLight(0x007acc, 1.2);
+    const fillLight = new THREE.DirectionalLight(0x1e40af, 1.2);
     fillLight.position.set(-5, 4, 3);
     scene.add(fillLight);
 
@@ -1446,15 +1630,19 @@ function init3DRobotArm() {
         const danceWristPitch = Math.sin(time * 1.0) * 0.25 + Math.cos(time * 2.0) * 0.08;          // Active pointing/stabilizing hand gestures
         const danceWristRoll = time * 0.4 + Math.sin(time * 0.8) * 0.6;                            // Continuous orbital spin with slow sway overlay
 
-        // Separate LERP calculations: Apply slow-inertia LERP to mouse cursor ONLY
-        const targetMouseTurntable = mouseX * 0.55;
-        const targetMouseShoulder = (mouseY * 0.25) - 0.12;
-        const targetMouseElbow = (mouseX * 0.22) + 0.4;
+        // Clamp mouse coordinates to [-1, 1] to prevent excessive rotation when mouse is off-canvas
+        const clampedMouseX = Math.max(-1, Math.min(1, mouseX));
+        const clampedMouseY = Math.max(-1, Math.min(1, mouseY));
 
-        // Smoothly interpolate the cursor influence
-        curTurntableRot += (targetMouseTurntable - curTurntableRot) * 0.045;
-        curShoulderRot += (targetMouseShoulder - curShoulderRot) * 0.045;
-        curElbowRot += (targetMouseElbow - curElbowRot) * 0.045;
+        // Separate LERP calculations: Apply responsive LERP to mouse cursor
+        const targetMouseTurntable = clampedMouseX * 0.75;
+        const targetMouseShoulder = (clampedMouseY * 0.35) - 0.12;
+        const targetMouseElbow = (clampedMouseX * 0.35) + 0.4;
+
+        // Smoothly interpolate the cursor influence with a more responsive 0.08 coefficient
+        curTurntableRot += (targetMouseTurntable - curTurntableRot) * 0.08;
+        curShoulderRot += (targetMouseShoulder - curShoulderRot) * 0.08;
+        curElbowRot += (targetMouseElbow - curElbowRot) * 0.08;
 
         // Combine LERPed cursor tracking AND undampened dynamic dancing waves!
         turntableGroup.rotation.y = curTurntableRot + danceBase;
@@ -1994,7 +2182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroScrollReveal();
     initSmartNav();
     init3DRobotArm();
-    initInertialScroll();
+    // initInertialScroll();
     initScrollParallax();
     initTimelineScrollObserver();
     initSkillsTabs();

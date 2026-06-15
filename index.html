@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rittu Ronald | Mechatronics & Automation Engineer</title>
+    <meta name="description" content="Portfolio of Rittu Ronald, a Mechatronics & Automation Engineer building intelligent systems that move with purpose and predictive maintenance solutions.">
     <!-- Fonts: Orbitron for headings, JetBrains Mono for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +30,7 @@
     </div>
 
     <div class="grid-bg"></div>
-    <canvas id="particles-bg"></canvas>
+    <canvas id="body-particles-bg"></canvas>
 
     <!-- Navigation -->
     <nav>
@@ -41,12 +42,18 @@
             <li><a href="#education">Education</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#clubs">Clubs</a></li>
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-controls">
             <!-- Audio Toggle (Default Muted) -->
             <button id="audio-toggle" class="control-btn" title="Toggle Sci-Fi Audio Systems" aria-label="Toggle Audio">
                 <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-nav-toggle" class="control-btn mobile-nav-btn" title="Toggle Menu" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </nav>
@@ -57,6 +64,7 @@
             
             <!-- Base Layer (Light theme, Black text) -->
             <div class="hero-layer hero-base-layer">
+                <canvas id="particles-bg"></canvas>
 
                 
                 <!-- 3D Interactive Robot Arm Container -->
@@ -133,7 +141,7 @@
                         <span>ritturonald.rm@gmail.com</span>
                     </div>
                     <div class="contact-item">
-                        <i class="fa-solid fa-phone" style="color: #007acc;"></i>
+                        <i class="fa-solid fa-phone" style="color: #1e40af;"></i>
                         <span>+91 6379761638</span>
                     </div>
                     <div class="contact-item">
@@ -209,6 +217,24 @@
 
     <!-- Skills Section -->
     <section id="skills">
+        <!-- Background robot arm schematic -->
+        <svg class="decorative-schematic" style="right: 5%; top: 15%; width: 320px; height: 320px;" viewBox="0 0 100 100">
+            <line x1="20" y1="90" x2="80" y2="90" stroke-dasharray="2 2" />
+            <rect x="45" y="80" width="10" height="10" />
+            <circle cx="50" cy="80" r="4" />
+            <line x1="50" y1="80" x2="65" y2="50" />
+            <circle cx="65" cy="50" r="3" />
+            <line x1="65" y1="50" x2="55" y2="25" />
+            <circle cx="55" cy="25" r="3" />
+            <line x1="55" y1="25" x2="45" y2="20" />
+            <path d="M 45 20 L 40 25 M 45 20 L 40 15" />
+            <path d="M 50 70 A 10 10 0 0 1 57 74" stroke-dasharray="1 1" />
+            <text x="59" y="72" font-size="3" font-family="monospace">θ1</text>
+            <path d="M 65 43 A 7 7 0 0 1 61 46" stroke-dasharray="1 1" />
+            <text x="57" y="42" font-size="3" font-family="monospace">θ2</text>
+            <line x1="90" y1="80" x2="90" y2="50" stroke-width="0.5" stroke-dasharray="1 1" />
+            <text x="92" y="66" font-size="3" font-family="monospace">L1</text>
+        </svg>
         <div class="skills-section-wrapper fade-in">
             <h3>Skills</h3>
             <p style="margin-bottom: 30px;">Below is a list of some of the skills I have acquired during my career so far! I am constantly learning new and exciting skills.</p>
@@ -233,6 +259,23 @@
 
     <!-- Education Section -->
     <section id="education">
+        <!-- Background mechanical gears schematic -->
+        <svg class="decorative-schematic" style="left: 4%; bottom: 12%; width: 280px; height: 280px;" viewBox="0 0 100 100">
+            <circle cx="35" cy="50" r="20" stroke-dasharray="3 1.5" />
+            <circle cx="35" cy="50" r="17" />
+            <circle cx="35" cy="50" r="4" />
+            <line x1="35" y1="30" x2="35" y2="70" />
+            <line x1="15" y1="50" x2="55" y2="50" />
+            <circle cx="70" cy="50" r="15" stroke-dasharray="2.5 1.2" />
+            <circle cx="70" cy="50" r="12" />
+            <circle cx="70" cy="50" r="3" />
+            <line x1="70" y1="35" x2="70" y2="65" />
+            <line x1="55" y1="50" x2="85" y2="50" />
+            <path d="M 35 25 A 25 25 0 0 1 45 27" />
+            <text x="47" y="24" font-size="3" font-family="monospace">ω1</text>
+            <path d="M 70 30 A 20 20 0 0 0 62 32" />
+            <text x="56" y="29" font-size="3" font-family="monospace">ω2</text>
+        </svg>
         <h2 class="fade-in">Education</h2>
         <div class="education-card fade-in">
             <div class="edu-images">
@@ -265,6 +308,18 @@
 
     <!-- Experiences Section -->
     <section id="experience">
+        <!-- Background PCB trace schematic -->
+        <svg class="decorative-schematic amber" style="left: 2%; top: 10%; width: 260px; height: 260px;" viewBox="0 0 100 100">
+            <path d="M 10 10 L 40 10 L 50 20 L 80 20 L 90 30" stroke-width="1.2" />
+            <circle cx="10" cy="10" r="1.5" fill="currentColor" />
+            <circle cx="90" cy="30" r="1.5" fill="currentColor" />
+            <path d="M 20 40 L 35 40 L 45 50 L 45 70 L 60 85 L 80 85" stroke-width="1.2" />
+            <circle cx="20" cy="40" r="1.5" fill="currentColor" />
+            <circle cx="80" cy="85" r="1.5" fill="currentColor" />
+            <path d="M 70 10 L 70 30 L 60 40 L 60 60" stroke-width="1.2" />
+            <circle cx="70" cy="10" r="1.5" fill="currentColor" />
+            <rect x="58" y="60" width="4" height="4" fill="currentColor" />
+        </svg>
         <div class="exp-section-header fade-in">
             <h2>Experiences</h2>
             <p>My Academic & Professional Journey</p>
@@ -311,6 +366,10 @@
                     <img src="Internship/ashok leyland.jpg" alt="Ashok Leyland Node">
                 </div>
                 <div class="timeline-card">
+                    <span class="corner-tick top-left"></span>
+                    <span class="corner-tick top-right"></span>
+                    <span class="corner-tick bottom-left"></span>
+                    <span class="corner-tick bottom-right"></span>
                     <div class="timeline-card-header">
                         <h3>Ashok Leyland</h3>
                         <h4>Project Intern | Cab Panel Press Shop</h4>
@@ -340,6 +399,10 @@
             <!-- Experience 2: IIT Madras (Left Card) -->
             <div class="timeline-item right-date" id="exp-iit">
                 <div class="timeline-card">
+                    <span class="corner-tick top-left"></span>
+                    <span class="corner-tick top-right"></span>
+                    <span class="corner-tick bottom-left"></span>
+                    <span class="corner-tick bottom-right"></span>
                     <div class="timeline-card-header">
                         <h3>IIT Madras</h3>
                         <h4>Research Intern</h4>
@@ -389,6 +452,10 @@
                     <img src="photos/rane_transparent.png" alt="Rane Node">
                 </div>
                 <div class="timeline-card">
+                    <span class="corner-tick top-left"></span>
+                    <span class="corner-tick top-right"></span>
+                    <span class="corner-tick bottom-left"></span>
+                    <span class="corner-tick bottom-right"></span>
                     <div class="timeline-card-header">
                         <h3>Rane (Madras) Limited</h3>
                         <h4>Project Intern</h4>
@@ -418,6 +485,10 @@
             <!-- Experience 4: ISRO IPRC (Left Card) -->
             <div class="timeline-item right-date" id="exp-isro">
                 <div class="timeline-card">
+                    <span class="corner-tick top-left"></span>
+                    <span class="corner-tick top-right"></span>
+                    <span class="corner-tick bottom-left"></span>
+                    <span class="corner-tick bottom-right"></span>
                     <div class="timeline-card-header">
                         <h3>ISRO Propulsion Complex</h3>
                         <h4>In-Plant Trainee</h4>
@@ -464,6 +535,10 @@
                     <img src="Internship/humanoidx.png" alt="HumanoidXVITCC Node">
                 </div>
                 <div class="timeline-card">
+                    <span class="corner-tick top-left"></span>
+                    <span class="corner-tick top-right"></span>
+                    <span class="corner-tick bottom-left"></span>
+                    <span class="corner-tick bottom-right"></span>
                     <div class="timeline-card-header">
                         <h3>HumanoidX VITCC</h3>
                         <h4>Programming Lead</h4>
@@ -493,6 +568,10 @@
             <!-- Experience 6: Team MOVIS (Left Card) -->
             <div class="timeline-item right-date" id="exp-movis">
                 <div class="timeline-card">
+                    <span class="corner-tick top-left"></span>
+                    <span class="corner-tick top-right"></span>
+                    <span class="corner-tick bottom-left"></span>
+                    <span class="corner-tick bottom-right"></span>
                     <div class="timeline-card-header">
                         <h3>Team MOVIS</h3>
                         <h4>Mechatronics Engineer</h4>
