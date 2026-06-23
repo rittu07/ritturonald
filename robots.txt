@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /.vscode/
+Disallow: /New folder/
+
+Sitemap: https://www.ritturonald.in/sitemap.xml

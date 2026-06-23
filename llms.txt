@@ -1,0 +1,24 @@
+# Rittu Ronald - Mechatronics & Robotics Automation Engineer
+
+Portfolio website of Rittu Ronald, showcasing mechatronics engineering projects, robotics systems, predictive maintenance research, and professional experiences.
+
+## Main Pages
+- [Home](https://www.ritturonald.in/index.html): Personal profile, skills, education, and contact form.
+- [About](https://www.ritturonald.in/about.html): Journey beyond engineering: travel, photography, and personal interests.
+- [Projects](https://www.ritturonald.in/projects.html): Complete list of robotic systems, simulation packages, and control models.
+- [Blog](https://www.ritturonald.in/blog.html): Technical write-ups and diagnostic logs.
+
+## Engineering Experiences
+- [Ashok Leyland](https://www.ritturonald.in/experience-ashok.html): Industry 4.0 predictive maintenance and dynamic visual inspection systems.
+- [IIT Madras](https://www.ritturonald.in/experience-iit.html): Research internship designing Wireless Power Transfer coils.
+- [Rane Madras](https://www.ritturonald.in/experience-rane.html): Automated steering rack bend correction modeling and finite element stress analysis.
+- [ISRO Propulsion Complex](https://www.ritturonald.in/experience-isro.html): Training in liquid engine rocket propulsion and controls.
+- [HumanoidX VITCC](https://www.ritturonald.in/experience-humanoid.html): Leading the legged robotics programming division and ROS2 workshops.
+- [Team MOVIS](https://www.ritturonald.in/experience-movis.html): Mechatronics and combat bot systems design.
+
+## Key Projects
+- [MIMEX Helrit_bot v2.5](https://www.ritturonald.in/project-manipulator.html): Deployed leader-follower robotic arm with WebSocket telemetry and Three.js digital twin.
+- [ROS2 Autonomous Navigation](https://www.ritturonald.in/project-ros2-robot.html): SLAM mapping and path-planning robot.
+- [Obstacle Avoidance Arm](https://www.ritturonald.in/project-obstacle-avoidance.html): OpenCV vision obstacle avoidance and A* path replanning.
+- [Fuzzy-PID Suspension System](https://www.ritturonald.in/project-suspension.html): Fuzzy control loop active suspension simulated in MATLAB.
+- [Bio-Inspired Crashbox](https://www.ritturonald.in/project-crashbox.html): Mechanical impact mitigation structure design and FEA stress analysis.
